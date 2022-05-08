@@ -1,5 +1,5 @@
 ﻿using Comic.Data.EF;
-using Comic.ViewModel.Common;
+using Comic.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Comic.Application.Genders

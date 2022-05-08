@@ -1,6 +1,6 @@
-﻿namespace Comic.Data.Entities
+﻿namespace Comic.ViewModels.ChapterComics
 {
-    public class ChapterComic
+    public class ChapterComicViewModel
     {
         public int Id { get; set; }
 
@@ -12,13 +12,6 @@
 
         public int ViewCount { get; set; }
 
-        public bool IsActive { get; set; }
-
         public string SeoAlias { get; set; }
-
-
-        public List<HistoryReadComicOfUser> HistoryReadComicOfUsers { get; set; }
-
-        public List<UrlImageComic> UrlImageComics { get; set; }
     }
 }

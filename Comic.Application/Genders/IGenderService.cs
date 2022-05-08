@@ -1,4 +1,4 @@
-﻿using Comic.ViewModel.Common;
+﻿using Comic.ViewModels.Common;
 
 namespace Comic.Application.Genders
 {

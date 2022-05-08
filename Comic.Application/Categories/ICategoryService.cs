@@ -9,5 +9,7 @@ namespace Comic.Application.Categories
         Task<CategoryViewModel> GetById(int id);
 
         Task<CategoryViewModel> GetBySeoAlias(string seoAlias);
+
+        Task<List<CategoryViewModel>> GetCategoryShowHome();
     }
 }
