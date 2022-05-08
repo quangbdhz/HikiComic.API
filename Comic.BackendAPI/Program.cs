@@ -1,6 +1,9 @@
 using Comic.Application.Categories;
+using Comic.Application.ComicStrips;
 using Comic.Application.DetailComics;
 using Comic.Application.Genders;
+using Comic.Application.HistoryReadComicOfUsers;
+using Comic.Application.ListOfComicsUsersFollows;
 using Comic.Application.Users;
 using Comic.Data.EF;
 using Comic.Data.Entities;
@@ -27,6 +30,9 @@ builder.Services.AddTransient<IGenderService, GenderService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IDetailComicService, DetailComicService>();
+builder.Services.AddTransient<IComicStripService, ComicStripSerive>();
+builder.Services.AddTransient<IListOfComicsUsersFollowService, ListOfComicsUsersFollowService>();
+builder.Services.AddTransient<IHistoryReadComicOfUserService, HistoryReadComicOfUserService>();
 
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();

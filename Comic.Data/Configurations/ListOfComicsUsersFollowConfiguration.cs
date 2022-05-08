@@ -18,8 +18,6 @@ namespace Comic.Data.Configurations
             builder.HasOne(x => x.AppUser).WithMany(x => x.ListOfComicsUsersFollows).HasForeignKey(x => x.AppUserId);
 
             builder.HasOne(x => x.ComicStrip).WithMany(x => x.ListOfComicsUsersFollows).HasForeignKey(x => x.ComicId);
-
-            builder.HasOne(x => x.ChapterComic).WithMany(x => x.ListOfComicsUsersFollows).HasForeignKey(x => x.ChapterId);
         }
     }
 }

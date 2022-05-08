@@ -7,5 +7,6 @@ namespace Comic.Application.DetailComics
         Task<DetailComicViewModel> GetById(int id);
 
         Task<DetailComicViewModel> GetBySeoAlias(string seoAlias);
+
     }
 }

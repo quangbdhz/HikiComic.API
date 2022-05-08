@@ -13,6 +13,10 @@ namespace Comic.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
 
+            builder.Property(x => x.CountFollow).IsRequired(true).HasDefaultValue(0);
+
+            builder.Property(x => x.CountRating).IsRequired(true).HasDefaultValue(0);
+
             builder.Property(x => x.Rating).IsRequired(true).HasDefaultValue(0);
 
             builder.Property(x => x.Description).IsRequired(true).HasMaxLength(3800);

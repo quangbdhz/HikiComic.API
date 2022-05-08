@@ -1,4 +1,4 @@
-﻿namespace Comic.ViewModel.Common
+﻿namespace Comic.ViewModels.Common
 {
     public class ApiResult<T>
     {

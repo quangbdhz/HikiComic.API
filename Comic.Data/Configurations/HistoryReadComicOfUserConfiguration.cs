@@ -19,6 +19,8 @@ namespace Comic.Data.Configurations
 
             builder.HasOne(x => x.ComicStrip).WithMany(x => x.HistoryReadComicOfUsers).HasForeignKey(x => x.ComicId);
 
+            builder.HasOne(x => x.ChapterComic).WithMany(x => x.HistoryReadComicOfUsers).HasForeignKey(x => x.ChapterId);
+
         }
     }
 }
