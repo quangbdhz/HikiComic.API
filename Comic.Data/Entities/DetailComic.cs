@@ -8,6 +8,10 @@
 
         public int StatusId { get; set; }
 
+        public int CountFollow { get; set; }
+
+        public int CountRating { get; set; }
+
         public double Rating { get; set; }
 
         public string Description { get; set; }

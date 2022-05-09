@@ -1,4 +1,4 @@
-﻿namespace Comic.ViewModel.Common
+﻿namespace Comic.ViewModels.Common
 {
     public class ApiSuccessResult<T> : ApiResult<T>
     {
@@ -11,6 +11,7 @@
         public ApiSuccessResult()
         {
             IsSuccessed = true;
+            Message = "Successful";
         }
     }
 }

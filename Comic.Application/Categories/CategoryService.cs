@@ -36,5 +36,12 @@ namespace Comic.Application.Categories
             return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId }).FirstOrDefaultAsync();
 
         }
+
+        public async Task<List<CategoryViewModel>> GetCategoryShowHome()
+        {
+            var query = from c in _context.Categories where c.IsActive == true join dc in _context.DetailCategories on c.Id equals dc.CategoryId where c.IsShowHome == true select new { c, dc };
+
+            return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId }).ToListAsync();
+        }
     }
 }

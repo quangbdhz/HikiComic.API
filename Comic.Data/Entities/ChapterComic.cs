@@ -17,7 +17,7 @@
         public string SeoAlias { get; set; }
 
 
-        public List<ListOfComicsUsersFollow> ListOfComicsUsersFollows { get; set; }
+        public List<HistoryReadComicOfUser> HistoryReadComicOfUsers { get; set; }
 
         public List<UrlImageComic> UrlImageComics { get; set; }
     }

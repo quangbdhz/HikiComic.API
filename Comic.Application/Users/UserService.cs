@@ -1,6 +1,6 @@
 ﻿using Comic.Data.EF;
 using Comic.Data.Entities;
-using Comic.ViewModel.Common;
+using Comic.ViewModels.Common;
 using Comic.ViewModels.Users;
 using Comic.ViewModels.Users.UserDataRequest;
 using Microsoft.AspNetCore.Identity;
@@ -17,15 +17,13 @@ namespace Comic.Application.Users
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly RoleManager<AppRole> _roleManager;
         private readonly IConfiguration _config;
         private readonly ComicDbContext _context;
 
-        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config, ComicDbContext context)
+        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IConfiguration config, ComicDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
             _config = config;
             _context = context;
         }

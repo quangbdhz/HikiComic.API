@@ -59,9 +59,67 @@ namespace Comic.Application.DetailComics
             return detailComicViewModel;
         }
 
-        public Task<DetailComicViewModel> GetBySeoAlias(string seoAlias)
+        public async Task<DetailComicViewModel> GetBySeoAlias(string seoAlias)
         {
-            throw new NotImplementedException();
+            var detailComic = await _context.DetailComics.FirstOrDefaultAsync(x => x.SeoAlias == seoAlias);
+
+            if(detailComic == null)
+            {
+                return null;
+            }
+
+            var comic = await _context.ComicStrips.FirstOrDefaultAsync(x => x.Id == detailComic.Id && x.IsActive == true);
+
+            if (comic == null || detailComic == null)
+                return null;
+
+            var queryCategory = from c in _context.Categories
+                                join dc in _context.DetailCategories on c.Id equals dc.CategoryId
+                                join cidc in _context.CategoryInDetailComics on c.Id equals cidc.CategoryId
+                                where cidc.DetailComicId == comic.Id
+                                select new { c, dc };
+
+            var categories = await queryCategory.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId }).ToListAsync();
+
+
+            var queryAuthors = from a in _context.Authors
+                               join aidc in _context.AuthorInDetailComics on a.Id equals aidc.AuthorId
+                               where a.Id == detailComic.Id && a.IsActive == true
+                               select a;
+
+            var authors = await queryAuthors.Select(x => new AuthorViewModel() { Id = x.Id, NameAuthor = x.NameAuthor, DifferentName = x.DifferentName, SeoAlias = x.SeoAlias, DateCreated = x.DateCreated }).ToListAsync();
+
+            string status = "";
+
+            if(detailComic.StatusId == 1)
+            {
+                status = "Đang Tiến Hành";
+            }
+            else
+            {
+                status = "Hoàn thành";
+            }
+
+            var detailComicViewModel = new DetailComicViewModel()
+            {
+                Id = comic.Id,
+                NameComic = comic.NameComic,
+                DifferentNameComic = comic.DifferentNameComic,
+                ViewCount = comic.ViewCount,
+                UrlCoverImageComic = comic.UrlCoverImageComic,
+                DateCreated = comic.DateCreated,
+                IdNewChapter = comic.IdNewChapter,
+                Rating = detailComic.Rating,
+                Description = detailComic.Description,
+                SeoDescription = detailComic.SeoDescription,
+                SeoTitle = detailComic.SeoTitle,
+                SeoAlias = detailComic.SeoAlias,
+                Categories = categories,
+                Authors = authors,
+                Status = status
+            };
+
+            return detailComicViewModel;
         }
     }
 }

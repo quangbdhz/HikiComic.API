@@ -1,4 +1,4 @@
-﻿using Comic.ViewModel.Common;
+﻿using Comic.ViewModels.Common;
 using Comic.ViewModels.Users;
 using Comic.ViewModels.Users.UserDataRequest;
 

@@ -29,6 +29,8 @@ namespace Comic.ViewModels.DetailComics
 
         public string SeoAlias { get; set; }
 
+        public string Status { get; set; }
+
 
         public List<AuthorViewModel> Authors { get; set; } = new List<AuthorViewModel>();
 

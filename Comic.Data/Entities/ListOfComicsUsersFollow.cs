@@ -8,15 +8,11 @@
 
         public int ComicId { get; set; }
 
-        public int ChapterId { get; set; }
-
         public DateTime DateFollow { get; set; }
 
 
         public AppUser AppUser { get; set; }
 
         public ComicStrip ComicStrip { get; set; }
-
-        public ChapterComic ChapterComic { get; set; }
     }
 }

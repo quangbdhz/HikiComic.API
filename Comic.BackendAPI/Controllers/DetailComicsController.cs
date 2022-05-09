@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Comic.BackendAPI.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class DetailComicsController : ControllerBase
     {
@@ -22,5 +21,14 @@ namespace Comic.BackendAPI.Controllers
             var detailComic = await _detailComicService.GetById(id);
             return Ok(detailComic);
         }
+
+        [HttpGet("getbyseoalias/{seoalias}")]
+        public async Task<IActionResult> GetById(string seoalias)
+        {
+            var detailComic = await _detailComicService.GetBySeoAlias(seoalias);
+            return Ok(detailComic);
+        }
+
+
     }
 }

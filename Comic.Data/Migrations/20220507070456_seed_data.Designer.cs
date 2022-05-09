@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comic.Data.Migrations
 {
     [DbContext(typeof(ComicDbContext))]
-    [Migration("20220429112148_db_seed_data")]
-    partial class db_seed_data
+    [Migration("20220507070456_seed_data")]
+    partial class seed_data
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,7 +51,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = new Guid("e1db1200-1bb6-4156-9da3-135e91d94aba"),
-                            ConcurrencyStamp = "70a20af4-d75b-4d38-bf84-8d83e5aca7c7",
+                            ConcurrencyStamp = "e2d3b151-a708-4110-bf7f-79a28825239b",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -59,7 +59,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = new Guid("c489f858-aabd-4264-96c1-5cdca251d871"),
-                            ConcurrencyStamp = "6fd923a6-0960-4d16-8d4b-54ea0674dd2b",
+                            ConcurrencyStamp = "94856da1-bccf-4229-86fc-15fc39075afe",
                             Description = "Staff role",
                             Name = "staff",
                             NormalizedName = "staff"
@@ -67,7 +67,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = new Guid("2f0c7b75-8934-4101-bef2-c850e42d21de"),
-                            ConcurrencyStamp = "442ab809-7685-4d16-b188-08978316b277",
+                            ConcurrencyStamp = "ebef4536-12b2-4f80-9ea3-08d5310e4c96",
                             Description = "Customer role",
                             Name = "customer",
                             NormalizedName = "customer"
@@ -163,7 +163,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "61f303b0-c3c3-4d19-a640-58b247c909c8",
+                            ConcurrencyStamp = "e74f177f-635d-45ff-9cdc-269f3af30633",
                             Dob = new DateTime(2001, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tranquangbhdz@gmail.com",
                             EmailConfirmed = true,
@@ -175,7 +175,7 @@ namespace Comic.Data.Migrations
                             MoreInfo = "Chùm",
                             NormalizedEmail = "tranquangbhdz@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHGHOvIpnsPF8ItHKF5BQWPGp0sEWswy9jQCVEkZlrNbNBIhQy1uzE4tSZ3wnHNYbQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJES+ys/OkvgxbyArZXR/gyjKdFx4OzZWcZaC/PhA9f8JSeiudJVHkh722QP4t+ljg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -220,7 +220,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 4, 29, 18, 21, 47, 726, DateTimeKind.Local).AddTicks(3487),
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7548),
                             DifferentName = "Trương Uy",
                             IsActive = true,
                             NameAuthor = "Đường Gia Tam Thiếu",
@@ -229,11 +229,38 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 4, 29, 18, 21, 47, 726, DateTimeKind.Local).AddTicks(3489),
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7550),
                             DifferentName = "Lý Hổ",
                             IsActive = true,
                             NameAuthor = "Thiên Tằm Thổ Đậu",
                             SeoAlias = "thien-tam-tho-dau"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7551),
+                            DifferentName = "",
+                            IsActive = true,
+                            NameAuthor = "Ogawa Makoto",
+                            SeoAlias = "ogawa-makoto"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7552),
+                            DifferentName = "",
+                            IsActive = true,
+                            NameAuthor = "Black Ajin",
+                            SeoAlias = "black-ajin"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7553),
+                            DifferentName = "",
+                            IsActive = true,
+                            NameAuthor = "Đang cập nhật",
+                            SeoAlias = "dang-cap-nhat"
                         });
                 });
 
@@ -261,6 +288,21 @@ namespace Comic.Data.Migrations
                         {
                             AuthorId = 2,
                             DetailComicId = 2
+                        },
+                        new
+                        {
+                            AuthorId = 3,
+                            DetailComicId = 3
+                        },
+                        new
+                        {
+                            AuthorId = 4,
+                            DetailComicId = 4
+                        },
+                        new
+                        {
+                            AuthorId = 5,
+                            DetailComicId = 5
                         });
                 });
 
@@ -292,21 +334,84 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 4, 29, 18, 21, 47, 726, DateTimeKind.Local).AddTicks(3426),
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7467),
                             IsActive = true,
                             IsShowHome = true
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 4, 29, 18, 21, 47, 726, DateTimeKind.Local).AddTicks(3436),
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7477),
                             IsActive = true,
                             IsShowHome = true
                         },
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2022, 4, 29, 18, 21, 47, 726, DateTimeKind.Local).AddTicks(3437),
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7478),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7479),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7479),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7480),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7481),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7482),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7483),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7483),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7484),
+                            IsActive = true,
+                            IsShowHome = true
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7485),
                             IsActive = true,
                             IsShowHome = true
                         });
@@ -341,6 +446,41 @@ namespace Comic.Data.Migrations
                         {
                             CategoryId = 3,
                             DetailComicId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 12,
+                            DetailComicId = 3
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            DetailComicId = 3
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            DetailComicId = 4
+                        },
+                        new
+                        {
+                            CategoryId = 1,
+                            DetailComicId = 4
+                        },
+                        new
+                        {
+                            CategoryId = 12,
+                            DetailComicId = 4
+                        },
+                        new
+                        {
+                            CategoryId = 1,
+                            DetailComicId = 5
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            DetailComicId = 5
                         });
                 });
 
@@ -380,6 +520,78 @@ namespace Comic.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ChapterComics", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ComicId = 1,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7668),
+                            IsActive = true,
+                            NameChapter = "Chapter 1",
+                            SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313/chapter-1-284272",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ComicId = 1,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7670),
+                            IsActive = true,
+                            NameChapter = "Chapter 2",
+                            SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313/chapter-2-524817",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ComicId = 1,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7671),
+                            IsActive = true,
+                            NameChapter = "Chapter 3",
+                            SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313/chapter-3-846113",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ComicId = 1,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7672),
+                            IsActive = true,
+                            NameChapter = "Chapter 4",
+                            SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313/chapter-4-247242",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ComicId = 2,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7673),
+                            IsActive = true,
+                            NameChapter = "Chapter 1",
+                            SeoAlias = "/dau-pha-thuong-khung-123813/chapter-1-119211",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ComicId = 2,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7674),
+                            IsActive = true,
+                            NameChapter = "Chapter 1.5",
+                            SeoAlias = "/dau-pha-thuong-khung-123813/chapter-1.5-249671",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ComicId = 2,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7675),
+                            IsActive = true,
+                            NameChapter = "Chapter 2",
+                            SeoAlias = "/dau-pha-thuong-khung-123813/chapter-2-359611",
+                            ViewCount = 0
+                        });
                 });
 
             modelBuilder.Entity("Comic.Data.Entities.ComicStrip", b =>
@@ -427,7 +639,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 4, 29, 18, 21, 47, 726, DateTimeKind.Local).AddTicks(3504),
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7586),
                             DifferentNameComic = "",
                             IsActive = true,
                             NameComic = "Đấu La Đại Lục Ⅴ Trùng Sinh Đường Tam",
@@ -437,11 +649,41 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 4, 29, 18, 21, 47, 726, DateTimeKind.Local).AddTicks(3507),
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7591),
                             DifferentNameComic = "",
                             IsActive = true,
                             NameComic = "Đấu Phá Thương Khung",
                             UrlCoverImageComic = "https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7593),
+                            DifferentNameComic = "PARIPI KOUMEI; パリピ孔明",
+                            IsActive = true,
+                            NameComic = "Khổng Minh Thích Tiệc Tùng",
+                            UrlCoverImageComic = "https://s199.imacdn.com/tt24/2022/04/26/7320277562288939_9aa537180a57276c_4220616509574003828291.jpg",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7594),
+                            DifferentNameComic = "Anh Hùng Trở Về; Anh Hùng Hồi Quy; The Hero Returns",
+                            IsActive = true,
+                            NameComic = "Anh Hùng Trở Lại",
+                            UrlCoverImageComic = "https://i3.wp.com/nhattruyenz.com/images/anh-hung-tro-lai.jpg",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7595),
+                            DifferentNameComic = "",
+                            IsActive = true,
+                            NameComic = "Streamer Pháp Sư",
+                            UrlCoverImageComic = "https://i3.wp.com/nhattruyenz.com/images/streamer-phap-su.jpg",
                             ViewCount = 0
                         });
                 });
@@ -488,7 +730,7 @@ namespace Comic.Data.Migrations
                             Id = 1,
                             CategoryId = 1,
                             NameCategory = "Action",
-                            SeoAlias = "action",
+                            SeoAlias = "/action",
                             SeoDescription = "Thể loại hành động",
                             SeoTitle = "Hành Động"
                         },
@@ -497,7 +739,7 @@ namespace Comic.Data.Migrations
                             Id = 2,
                             CategoryId = 2,
                             NameCategory = "Slice of Life",
-                            SeoAlias = "slice-of-life",
+                            SeoAlias = "/slice-of-life",
                             SeoDescription = "Thể loại nói về cuộc sống đời thường",
                             SeoTitle = "Cuộc Sống Đời Thường"
                         },
@@ -506,9 +748,81 @@ namespace Comic.Data.Migrations
                             Id = 3,
                             CategoryId = 3,
                             NameCategory = "Harem",
-                            SeoAlias = "harem",
+                            SeoAlias = "/harem",
                             SeoDescription = "Thể loại truyện tình cảm, lãng mạn mà trong đó, nhiều nhân vật nữ thích một nam nhân vật chính",
                             SeoTitle = "Tình Cảm, Lãng Mạn, Nhiều Nữ Thích Một Nam"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 4,
+                            NameCategory = "Adventure",
+                            SeoAlias = "/adventure",
+                            SeoDescription = "Thể loại phiêu lưu, mạo hiểm, thường là hành trình của các nhân vật"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 5,
+                            NameCategory = "Romance",
+                            SeoAlias = "/romance",
+                            SeoDescription = "Thường là những câu chuyện về tình yêu, tình cảm lãng mạn. Ớ đây chúng ta sẽ lấy ví dụ như tình yêu giữa một người con trai và con gái, bên cạnh đó đặc điểm thể loại này là kích thích trí tưởng tượng của bạn về tình yêu"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 6,
+                            NameCategory = "Horror",
+                            SeoAlias = "/horror",
+                            SeoDescription = "Horror là: rùng rợn, nghe cái tên là bạn đã hiểu thể loại này có nội dung thế nào. Nó làm cho bạn kinh hãi, khiếp sợ, ghê tởm, run rẩy, có thể gây sock - một thể loại không dành cho người yếu tim"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 7,
+                            NameCategory = "Mature",
+                            SeoAlias = "/mature",
+                            SeoDescription = "Thể loại dành cho lứa tuổi 17+ bao gồm các pha bạo lực, máu me, chém giết, tình dục ở mức độ vừa"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 8,
+                            NameCategory = "Manhwa",
+                            SeoAlias = "/manhwa",
+                            SeoDescription = "Truyện tranh Hàn Quốc, đọc từ trái sang phải"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 9,
+                            NameCategory = "Manhua",
+                            SeoAlias = "/manhua",
+                            SeoDescription = "Truyện tranh của Trung Quốc"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 10,
+                            NameCategory = "Ecchi",
+                            SeoAlias = "/ecchi",
+                            SeoDescription = "Thường có những tình huống nhạy cảm nhằm lôi cuốn người xem"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 11,
+                            NameCategory = "Drama",
+                            SeoAlias = "/drama",
+                            SeoDescription = "Thể loại mang đến cho người xem những cảm xúc khác nhau: buồn bã, căng thẳng thậm chí là bi phẫn"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 12,
+                            NameCategory = "Isekai",
+                            SeoAlias = "/isekai",
+                            SeoDescription = "Thể loại này là những câu chuyện về người ở một thế giới này xuyên đến một thế giới khác, có thể là thế giới mang phong cách trung cổ với kiếm sĩ và ma thuật, hay thế giới trong game, hoặc có thể là bạn chết ở nơi này và được chuyển sinh đến nơi khác"
                         });
                 });
 
@@ -522,6 +836,16 @@ namespace Comic.Data.Migrations
 
                     b.Property<int>("ComicId")
                         .HasColumnType("int");
+
+                    b.Property<int>("CountFollow")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("CountRating")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -563,9 +887,11 @@ namespace Comic.Data.Migrations
                         {
                             Id = 1,
                             ComicId = 1,
+                            CountFollow = 0,
+                            CountRating = 0,
                             Description = "Một đời Thần Vương trùng sinh tại Pháp Lam thế giới thần kỳ, hắn kinh ngạc phát hiện, nơi này hết thảy đều là như vậy kỳ diệu, hắn càng là vận khí tuyệt hảo tìm được thê tử chuyển thế thân. Thế nhưng là, nàng không có trí nhớ của kiếp trước, gặp nhau lần nữa đã là người qua đường.",
                             Rating = 0.0,
-                            SeoAlias = "dau-la-dai-luc-trung-sinh-duong-tam-119313",
+                            SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313",
                             SeoDescription = "Đấu La Đại Lục Ⅴ Trùng Sinh Đường Tam Một Phần Mới Của Tác Giả Đường Gia Tam Thiếu",
                             SeoTitle = "Đấu La Đại Lục Ⅴ Trùng Sinh Đường Tam",
                             StatusId = 1
@@ -574,11 +900,52 @@ namespace Comic.Data.Migrations
                         {
                             Id = 2,
                             ComicId = 2,
+                            CountFollow = 0,
+                            CountRating = 0,
                             Description = "Đây là một thế giới thuộc về Đấu Khí, không hề có ma pháp hoa tiếu diễm lệ, chỉ có đấu khí cương mãnh phồn thịnh ! Tưởng tượng thế giới đó sẽ phát triển ra sao ? mời các bạn xem Đấu Phá Thương Khung!",
                             Rating = 0.0,
-                            SeoAlias = "dau-pha-thuong-khung-123813",
+                            SeoAlias = "/dau-pha-thuong-khung-123813",
                             SeoDescription = "Đấu Phá Thương Khung Một Trong Những Bộ Truyện Có Lượt Xem Nhiều Nhất",
                             SeoTitle = "Đấu Phá Thương Khung",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ComicId = 3,
+                            CountFollow = 0,
+                            CountRating = 0,
+                            Description = "Bậc thầy quân sự nổi tiếng - Gia Cát Lượng Khổng Minh - người đã chết trong trận Ngũ Trượng Nguyên trở lại với cơ thể khi còn trẻ và tái sinh về Nhật Bản hiện đại. Được những người mê tiệc tùng ở Shibuya dẫn đi, Khổng Minh đã tới hộp đêm vang vọng tiếng nhạc EDM. Ở đó Khổng Minh đã gặp Tsukimi Eiko, người có mục tiêu trở thành ca sĩ, chính là người đã vén lên tấm ván cuộc sống thứ hai của ông. Người sống vì thiên hạ thái bình ở thời Tam Quốc như ông sẽ sống gì điều gì đây...!?",
+                            Rating = 0.0,
+                            SeoAlias = "/khong-minh-thich-tiec-tung-813713",
+                            SeoDescription = "Gia Cát Lượng Khổng Minh - người đã chết trong trận Ngũ Trượng Nguyên trở lại với cơ thể khi còn trẻ và tái sinh về Nhật Bản hiện đại.",
+                            SeoTitle = "Gia Cát Lượng Khổng Minh",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ComicId = 4,
+                            CountFollow = 0,
+                            CountRating = 0,
+                            Description = "Đệ nhất anh hùng của nhân loại, Kim Sung In.<br>Anh ấy bỏ mặc mọi thứ để quyết tâm lên đường chiến đấu  nhưng… Anh ấy vẫn không thể ngăn chặn sự hủy diệt của thế giới.<br>Tuy nhiên câu truyện huyền thoại của anh ấy chỉ mới bắt đầu khi anh ấy quay trở lại quá khứ vào 20 năm trước.",
+                            Rating = 0.0,
+                            SeoAlias = "/anh-hung-tro-lai-590960",
+                            SeoDescription = "Câu truyện huyền thoại của anh ấy chỉ mới bắt đầu khi anh ấy quay trở lại quá khứ vào 20 năm trước.",
+                            SeoTitle = "Anh Hùng Trở Về",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ComicId = 5,
+                            CountFollow = 0,
+                            CountRating = 0,
+                            Description = "Truyện tranh Streamer Pháp Sư được cập nhật nhanh và đầy đủ nhất tại HikiComic. Bạn đọc đừng quên để lại bình luận và chia sẻ, ủng hộ HikiComic ra các chương mới nhất của truyện Streamer Pháp Sư.",
+                            Rating = 0.0,
+                            SeoAlias = "/streamer-phap-su-576390",
+                            SeoDescription = "STREAMER PHÁP SƯ",
+                            SeoTitle = "STREAMER PHÁP SƯ",
                             StatusId = 1
                         });
                 });
@@ -624,6 +991,9 @@ namespace Comic.Data.Migrations
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ComicId")
                         .HasColumnType("int");
 
@@ -634,9 +1004,29 @@ namespace Comic.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
+                    b.HasIndex("ChapterId");
+
                     b.HasIndex("ComicId");
 
                     b.ToTable("HistoryReadComicOfUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AppUserId = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
+                            ChapterId = 1,
+                            ComicId = 1,
+                            DateRead = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7736)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AppUserId = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
+                            ChapterId = 6,
+                            ComicId = 2,
+                            DateRead = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7737)
+                        });
                 });
 
             modelBuilder.Entity("Comic.Data.Entities.ListOfComicsUsersFollow", b =>
@@ -650,9 +1040,6 @@ namespace Comic.Data.Migrations
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ChapterId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ComicId")
                         .HasColumnType("int");
 
@@ -663,11 +1050,25 @@ namespace Comic.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("ChapterId");
-
                     b.HasIndex("ComicId");
 
                     b.ToTable("ListOfComicsUsersFollows", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AppUserId = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
+                            ComicId = 1,
+                            DateFollow = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7720)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AppUserId = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
+                            ComicId = 2,
+                            DateFollow = new DateTime(2022, 5, 7, 14, 4, 56, 104, DateTimeKind.Local).AddTicks(7721)
+                        });
                 });
 
             modelBuilder.Entity("Comic.Data.Entities.Status", b =>
@@ -691,12 +1092,12 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 1,
-                            NameStatus = "Còn sử dụng"
+                            NameStatus = "Đang tiến hành"
                         },
                         new
                         {
                             Id = 2,
-                            NameStatus = "Hết sử dụng"
+                            NameStatus = "Hoàn thành"
                         });
                 });
 
@@ -725,6 +1126,43 @@ namespace Comic.Data.Migrations
                     b.HasIndex("ChapterComicId");
 
                     b.ToTable("UrlImageComics", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ChapterComicId = 1,
+                            IsActive = true,
+                            UrlImageChapterComic = "|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ChapterComicId = 2,
+                            IsActive = true,
+                            UrlImageChapterComic = "|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ChapterComicId = 3,
+                            IsActive = true,
+                            UrlImageChapterComic = "|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ChapterComicId = 4,
+                            IsActive = true,
+                            UrlImageChapterComic = "|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg|https://salt.tikicdn.com/ts/product/f6/b5/b7/6acaf61c8357d23e223b2fe5b9d065f0.jpg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ChapterComicId = 5,
+                            IsActive = true,
+                            UrlImageChapterComic = "|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -911,6 +1349,12 @@ namespace Comic.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Comic.Data.Entities.ChapterComic", "ChapterComic")
+                        .WithMany("HistoryReadComicOfUsers")
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Comic.Data.Entities.ComicStrip", "ComicStrip")
                         .WithMany("HistoryReadComicOfUsers")
                         .HasForeignKey("ComicId")
@@ -918,6 +1362,8 @@ namespace Comic.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+
+                    b.Navigation("ChapterComic");
 
                     b.Navigation("ComicStrip");
                 });
@@ -930,12 +1376,6 @@ namespace Comic.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Comic.Data.Entities.ChapterComic", "ChapterComic")
-                        .WithMany("ListOfComicsUsersFollows")
-                        .HasForeignKey("ChapterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Comic.Data.Entities.ComicStrip", "ComicStrip")
                         .WithMany("ListOfComicsUsersFollows")
                         .HasForeignKey("ComicId")
@@ -943,8 +1383,6 @@ namespace Comic.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-
-                    b.Navigation("ChapterComic");
 
                     b.Navigation("ComicStrip");
                 });
@@ -981,7 +1419,7 @@ namespace Comic.Data.Migrations
 
             modelBuilder.Entity("Comic.Data.Entities.ChapterComic", b =>
                 {
-                    b.Navigation("ListOfComicsUsersFollows");
+                    b.Navigation("HistoryReadComicOfUsers");
 
                     b.Navigation("UrlImageComics");
                 });

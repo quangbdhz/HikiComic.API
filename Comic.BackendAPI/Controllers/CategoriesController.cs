@@ -35,5 +35,12 @@ namespace Comic.BackendAPI.Controllers
             var category = await _categoryService.GetBySeoAlias(seoAlias);
             return Ok(category);
         }
+
+        [HttpGet("IsShowHome")]
+        public async Task<IActionResult> GetIsShowHome()
+        {
+            var categories = await _categoryService.GetCategoryShowHome();
+            return Ok(categories);
+        }
     }
 }
