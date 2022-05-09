@@ -50,18 +50,18 @@ namespace Comic.Data.Extensions
                 });
 
             modelBuilder.Entity<Category>().HasData(
-                new Category() { Id = 1, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 2, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 3, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 4, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 5, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 6, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 7, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 8, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 9, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 10, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 11, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
-                new Category() { Id = 12, IsShowHome = true, IsActive = true, DateCreated = DateTime.Now });
+                new Category() { Id = 1, UrlImageCategory = "https://inkr.com/images/explore/action.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 2, UrlImageCategory = "https://inkr.com/images/explore/comedy.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 3, UrlImageCategory = "https://inkr.com/images/explore/comedy.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 4, UrlImageCategory = "https://inkr.com/images/explore/adventure.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 5, UrlImageCategory = "https://inkr.com/images/explore/romance.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 6, UrlImageCategory = "https://inkr.com/images/explore/horror.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 7, UrlImageCategory = "https://inkr.com/images/explore/mature.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 8, UrlImageCategory = "https://inkr.com/images/explore/comedy.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 9, UrlImageCategory = "https://inkr.com/images/explore/manhua.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 10, UrlImageCategory = "https://inkr.com/images/explore/comedy.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 11, UrlImageCategory = "https://inkr.com/images/explore/comedy.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now },
+                new Category() { Id = 12, UrlImageCategory = "https://inkr.com/images/explore/comedy.svg", IsShowHome = true, IsActive = true, DateCreated = DateTime.Now });
 
             modelBuilder.Entity<DetailCategory>().HasData(
                 new DetailCategory() { Id = 1, CategoryId = 1, NameCategory = "Action", SeoAlias = "/action", SeoDescription = "Thể loại hành động", SeoTitle = "Hành Động" },
@@ -85,11 +85,11 @@ namespace Comic.Data.Extensions
                 new Author() { Id = 5, DateCreated = DateTime.Now, NameAuthor = "Đang cập nhật", DifferentName = "", IsActive = true, SeoAlias = "dang-cap-nhat" });
 
             modelBuilder.Entity<ComicStrip>().HasData(
-                new ComicStrip() { Id = 1, DateCreated = DateTime.Now, NameComic = "Đấu La Đại Lục Ⅴ Trùng Sinh Đường Tam", DifferentNameComic = "", ViewCount = 0, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://static.cdnno.com/poster/dau-la-dai-luc-trung-sinh-duong-tam/300.jpg?1621052117" },
-                new ComicStrip() { Id = 2, DateCreated = DateTime.Now, NameComic = "Đấu Phá Thương Khung", DifferentNameComic = "", ViewCount = 0, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png" },
-                new ComicStrip() { Id = 3, DateCreated = DateTime.Now, NameComic = "Khổng Minh Thích Tiệc Tùng", DifferentNameComic = "PARIPI KOUMEI; パリピ孔明", ViewCount = 0, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://s199.imacdn.com/tt24/2022/04/26/7320277562288939_9aa537180a57276c_4220616509574003828291.jpg" },
-                new ComicStrip() { Id = 4, DateCreated = DateTime.Now, NameComic = "Anh Hùng Trở Lại", DifferentNameComic = "Anh Hùng Trở Về; Anh Hùng Hồi Quy; The Hero Returns", ViewCount = 0, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://i3.wp.com/nhattruyenz.com/images/anh-hung-tro-lai.jpg" },
-                new ComicStrip() { Id = 5, DateCreated = DateTime.Now, NameComic = "Streamer Pháp Sư", DifferentNameComic = "", ViewCount = 0, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://i3.wp.com/nhattruyenz.com/images/streamer-phap-su.jpg" });
+                new ComicStrip() { Id = 1, DateCreated = DateTime.Now, NameComic = "Đấu La Đại Lục Ⅴ Trùng Sinh Đường Tam", DifferentNameComic = "", ViewCount = 11111, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://static.cdnno.com/poster/dau-la-dai-luc-trung-sinh-duong-tam/300.jpg?1621052117" },
+                new ComicStrip() { Id = 2, DateCreated = DateTime.Now, NameComic = "Đấu Phá Thương Khung", DifferentNameComic = "", ViewCount = 312, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png" },
+                new ComicStrip() { Id = 3, DateCreated = DateTime.Now, NameComic = "Khổng Minh Thích Tiệc Tùng", DifferentNameComic = "PARIPI KOUMEI; パリピ孔明", ViewCount = 5, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://s199.imacdn.com/tt24/2022/04/26/7320277562288939_9aa537180a57276c_4220616509574003828291.jpg" },
+                new ComicStrip() { Id = 4, DateCreated = DateTime.Now, NameComic = "Anh Hùng Trở Lại", DifferentNameComic = "Anh Hùng Trở Về; Anh Hùng Hồi Quy; The Hero Returns", ViewCount = 110, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://i3.wp.com/nhattruyenz.com/images/anh-hung-tro-lai.jpg" },
+                new ComicStrip() { Id = 5, DateCreated = DateTime.Now, NameComic = "Streamer Pháp Sư", DifferentNameComic = "", ViewCount = 880, IsActive = true, IdNewChapter = null, UrlCoverImageComic = "https://i3.wp.com/nhattruyenz.com/images/streamer-phap-su.jpg" });
 
             modelBuilder.Entity<DetailComic>().HasData(
                 new DetailComic() { Id = 1, ComicId = 1, StatusId = 1, CountFollow = 0, CountRating = 0, Rating = 0, Description = "Một đời Thần Vương trùng sinh tại Pháp Lam thế giới thần kỳ, hắn kinh ngạc phát hiện, nơi này hết thảy đều là như vậy kỳ diệu, hắn càng là vận khí tuyệt hảo tìm được thê tử chuyển thế thân. Thế nhưng là, nàng không có trí nhớ của kiếp trước, gặp nhau lần nữa đã là người qua đường.", SeoDescription = "Đấu La Đại Lục Ⅴ Trùng Sinh Đường Tam Một Phần Mới Của Tác Giả Đường Gia Tam Thiếu", SeoTitle = "Đấu La Đại Lục Ⅴ Trùng Sinh Đường Tam", SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313" },

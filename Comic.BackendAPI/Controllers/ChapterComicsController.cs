@@ -18,13 +18,21 @@ namespace Comic.BackendAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var chapterComics = await _chapterComicService.GetById(id);
+
+            if (chapterComics == null)
+                return NotFound();
+
             return Ok(chapterComics);
         }
 
         [HttpGet("GetBySeoAlias/{seoAlias}")]
         public async Task<IActionResult> GetBySeoAlias(string seoAlias)
         {
-            var chapterComics = await _chapterComicService.GetBySeoAlias(seoAlias);
+            var chapterComics = await _chapterComicService.GetBySeoAlias(seoAlias); 
+
+            if (chapterComics == null)
+                return NotFound();
+
             return Ok(chapterComics);
         }
 

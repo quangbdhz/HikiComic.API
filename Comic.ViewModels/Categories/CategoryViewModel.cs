@@ -9,5 +9,7 @@
         public string? SeoAlias { get; set; }
 
         public int? ParentId { get; set; }
+
+        public string UrlImageCategory { get; set; }
     }
 }

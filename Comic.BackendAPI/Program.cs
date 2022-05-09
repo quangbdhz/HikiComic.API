@@ -1,4 +1,5 @@
 using Comic.Application.Categories;
+using Comic.Application.ChapterComics;
 using Comic.Application.ComicStrips;
 using Comic.Application.DetailComics;
 using Comic.Application.Genders;
@@ -33,14 +34,23 @@ builder.Services.AddTransient<IDetailComicService, DetailComicService>();
 builder.Services.AddTransient<IComicStripService, ComicStripSerive>();
 builder.Services.AddTransient<IListOfComicsUsersFollowService, ListOfComicsUsersFollowService>();
 builder.Services.AddTransient<IHistoryReadComicOfUserService, HistoryReadComicOfUserService>();
+builder.Services.AddTransient<IChapterComicService, ChapterComicService>();
 
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 
+var ApiAllowSpecificOrigins = "_apiAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: ApiAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                      });
+});
 
 //builder.Services.AddControllers();
-
 builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
 
@@ -108,6 +118,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseRouting();
+
+app.UseCors(ApiAllowSpecificOrigins);
 
 app.UseAuthorization();
 

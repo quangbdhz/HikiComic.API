@@ -42,5 +42,12 @@ namespace Comic.BackendAPI.Controllers
             var categories = await _categoryService.GetCategoryShowHome();
             return Ok(categories);
         }
+
+        [HttpGet("GetBySize/{number}")]
+        public async Task<IActionResult> GetBySize(int number)
+        {
+            var categories = await _categoryService.GetBySize(number);
+            return Ok(categories);
+        }
     }
 }

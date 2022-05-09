@@ -11,5 +11,7 @@ namespace Comic.Application.Categories
         Task<CategoryViewModel> GetBySeoAlias(string seoAlias);
 
         Task<List<CategoryViewModel>> GetCategoryShowHome();
+
+        Task<List<CategoryViewModel>> GetBySize(int number);
     }
 }
