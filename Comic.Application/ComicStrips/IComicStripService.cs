@@ -18,7 +18,7 @@ namespace Comic.Application.ComicStrips
 
         Task<ApiResult<bool>> AddRating(int comicStripId, double rating);
 
-        Task<List<ComicStripViewModel>> GetNewComicPaging();
+        Task<List<ComicStripViewModel>> GetNewComicPaging(PagingRequestBase request);
 
         Task<List<ComicStripViewModel>> GetHotComicPaging();
     }
