@@ -4,8 +4,8 @@ namespace Comic.Application.ChapterComics
 {
     public interface IChapterComicService
     {
-        Task<List<ChapterComicViewModel>> GetById(int idComic);
+        Task<List<ChapterComicViewModel>> GetByComicId(int idComic);
 
-        Task<List<ChapterComicViewModel>> GetBySeoAlias(string seoAliasComic);
+        Task<List<ChapterComicViewModel>> GetByComicSeoAlias(string seoAliasComic);
     }
 }

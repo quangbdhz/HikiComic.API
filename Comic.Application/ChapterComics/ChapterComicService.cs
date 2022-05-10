@@ -14,7 +14,7 @@ namespace Comic.Application.ChapterComics
             _context = context;
         }
 
-        public async Task<List<ChapterComicViewModel>> GetById(int idComic)
+        public async Task<List<ChapterComicViewModel>> GetByComicId(int idComic)
         {
             var queryChapterComic = from c in _context.ChapterComics where c.ComicId == idComic
                                     select new { c };
@@ -24,7 +24,7 @@ namespace Comic.Application.ChapterComics
             return chapterComics;
         }
 
-        public async Task<List<ChapterComicViewModel>> GetBySeoAlias(string seoAliasComic)
+        public async Task<List<ChapterComicViewModel>> GetByComicSeoAlias(string seoAliasComic)
         {
             var getComic = await _context.DetailComics.SingleOrDefaultAsync(x => x.SeoAlias == seoAliasComic);
 

@@ -5,6 +5,7 @@ using Comic.Application.DetailComics;
 using Comic.Application.Genders;
 using Comic.Application.HistoryReadComicOfUsers;
 using Comic.Application.ListOfComicsUsersFollows;
+using Comic.Application.UrlChapterImageComics;
 using Comic.Application.Users;
 using Comic.Data.EF;
 using Comic.Data.Entities;
@@ -35,6 +36,7 @@ builder.Services.AddTransient<IComicStripService, ComicStripSerive>();
 builder.Services.AddTransient<IListOfComicsUsersFollowService, ListOfComicsUsersFollowService>();
 builder.Services.AddTransient<IHistoryReadComicOfUserService, HistoryReadComicOfUserService>();
 builder.Services.AddTransient<IChapterComicService, ChapterComicService>();
+builder.Services.AddTransient<IUrlChapterImageComicService, UrlChapterImageComicService>();
 
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();

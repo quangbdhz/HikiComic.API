@@ -17,7 +17,7 @@ namespace Comic.BackendAPI.Controllers
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var chapterComics = await _chapterComicService.GetById(id);
+            var chapterComics = await _chapterComicService.GetByComicId(id);
 
             if (chapterComics == null)
                 return NotFound();
@@ -28,7 +28,7 @@ namespace Comic.BackendAPI.Controllers
         [HttpGet("GetBySeoAlias/{seoAlias}")]
         public async Task<IActionResult> GetBySeoAlias(string seoAlias)
         {
-            var chapterComics = await _chapterComicService.GetBySeoAlias(seoAlias); 
+            var chapterComics = await _chapterComicService.GetByComicSeoAlias(seoAlias); 
 
             if (chapterComics == null)
                 return NotFound();
