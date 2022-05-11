@@ -1,6 +1,7 @@
 ﻿using Comic.Data.EF;
 using Comic.ViewModels.Categories;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Comic.Application.Categories
 {
@@ -31,6 +32,8 @@ namespace Comic.Application.Categories
 
         public async Task<CategoryViewModel> GetBySeoAlias(string seoAlias)
         {
+            seoAlias = WebUtility.UrlDecode(seoAlias);
+
             var query = from c in _context.Categories join dc in _context.DetailCategories on c.Id equals dc.CategoryId where dc.SeoAlias == seoAlias select new { c, dc };
 
             return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory }).FirstOrDefaultAsync();

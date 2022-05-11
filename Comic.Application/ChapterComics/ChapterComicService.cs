@@ -2,6 +2,7 @@
 using Comic.ViewModels.ChapterComics;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Net;
 
 namespace Comic.Application.ChapterComics
 {
@@ -26,6 +27,7 @@ namespace Comic.Application.ChapterComics
 
         public async Task<List<ChapterComicViewModel>> GetByComicSeoAlias(string seoAliasComic)
         {
+            seoAliasComic = WebUtility.UrlDecode(seoAliasComic);
             var getComic = await _context.DetailComics.SingleOrDefaultAsync(x => x.SeoAlias == seoAliasComic);
 
             if(getComic != null)
