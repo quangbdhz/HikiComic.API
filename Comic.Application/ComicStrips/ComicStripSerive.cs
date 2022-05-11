@@ -213,7 +213,6 @@ namespace Comic.Application.ComicStrips
         public async Task<List<ComicStripViewModel>> GetNewComicPaging(PagingRequestBase request)
         {
 
-
             var query = from c in _context.ComicStrips
                         join dc in _context.DetailComics on c.Id equals dc.ComicId
                         where c.IsActive == true orderby c.DateCreated descending
