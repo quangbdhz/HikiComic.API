@@ -1,9 +1,9 @@
-﻿namespace ProjectTestDbContext.ViewModel.Genders
+﻿namespace Comic.ViewModels.Genders
 {
     public class GenderViewModel
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }
