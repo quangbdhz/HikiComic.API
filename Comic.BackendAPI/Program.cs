@@ -2,6 +2,7 @@ using Comic.Application.Categories;
 using Comic.Application.ChapterComics;
 using Comic.Application.ComicStrips;
 using Comic.Application.DetailComics;
+using Comic.Application.MailConfirms;
 using Comic.Application.Genders;
 using Comic.Application.HistoryReadComicOfUsers;
 using Comic.Application.ListOfComicsUsersFollows;
@@ -30,6 +31,7 @@ builder.Services.AddIdentity<AppUser, AppRole>()
 
 builder.Services.AddTransient<IGenderService, GenderService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IMailConfirmService, MailConfirmService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IDetailComicService, DetailComicService>();
 builder.Services.AddTransient<IComicStripService, ComicStripSerive>();
