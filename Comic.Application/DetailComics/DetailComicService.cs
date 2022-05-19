@@ -3,6 +3,7 @@ using Comic.ViewModels.Authors;
 using Comic.ViewModels.Categories;
 using Comic.ViewModels.DetailComics;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Comic.Application.DetailComics
 {
@@ -61,6 +62,8 @@ namespace Comic.Application.DetailComics
 
         public async Task<DetailComicViewModel> GetBySeoAlias(string seoAlias)
         {
+            seoAlias = WebUtility.UrlDecode(seoAlias);
+
             var detailComic = await _context.DetailComics.FirstOrDefaultAsync(x => x.SeoAlias == seoAlias);
 
             if(detailComic == null)

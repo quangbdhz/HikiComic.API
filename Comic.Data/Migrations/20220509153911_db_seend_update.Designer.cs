@@ -4,6 +4,7 @@ using Comic.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comic.Data.Migrations
 {
     [DbContext(typeof(ComicDbContext))]
-    partial class ComicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220509153911_db_seend_update")]
+    partial class db_seend_update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = new Guid("e1db1200-1bb6-4156-9da3-135e91d94aba"),
-                            ConcurrencyStamp = "676e9dc4-540d-4d36-b43d-0845e1f7d224",
+                            ConcurrencyStamp = "5872a8ee-61b3-4d63-99ba-e985983f5f96",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -57,7 +59,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = new Guid("c489f858-aabd-4264-96c1-5cdca251d871"),
-                            ConcurrencyStamp = "98d59657-b52a-4223-b1b7-f7a48ff6dbce",
+                            ConcurrencyStamp = "6d96c4be-9293-4955-9de9-a768723fcebb",
                             Description = "Staff role",
                             Name = "staff",
                             NormalizedName = "staff"
@@ -65,7 +67,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = new Guid("2f0c7b75-8934-4101-bef2-c850e42d21de"),
-                            ConcurrencyStamp = "06f764cc-6918-48fe-bdbd-af9048edeb02",
+                            ConcurrencyStamp = "ed7fae60-7936-4fa5-bfce-d42560eab566",
                             Description = "Customer role",
                             Name = "customer",
                             NormalizedName = "customer"
@@ -161,7 +163,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "026ef0df-5f0b-43bd-8c9a-636bcd3fbcff",
+                            ConcurrencyStamp = "87749f27-d2aa-450a-aec2-87c5d119df22",
                             Dob = new DateTime(2001, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tranquangbhdz@gmail.com",
                             EmailConfirmed = true,
@@ -173,7 +175,7 @@ namespace Comic.Data.Migrations
                             MoreInfo = "Chùm",
                             NormalizedEmail = "tranquangbhdz@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHPuMzItDI7RuFG+NmXbbnGmIUPiROQ/ajV4pJ28wW0bcctA2b+dnjwAkwB8lq3ABQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM5jvplmCw811/ZUw4fP52l++yLwPnYxLyCE70XJyXQdJUhl9bgrppf27abZSYp1kw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -218,7 +220,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7977),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7978),
                             DifferentName = "Trương Uy",
                             IsActive = true,
                             NameAuthor = "Đường Gia Tam Thiếu",
@@ -227,7 +229,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7981),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7980),
                             DifferentName = "Lý Hổ",
                             IsActive = true,
                             NameAuthor = "Thiên Tằm Thổ Đậu",
@@ -236,7 +238,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7983),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7981),
                             DifferentName = "",
                             IsActive = true,
                             NameAuthor = "Ogawa Makoto",
@@ -245,7 +247,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7984),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7982),
                             DifferentName = "",
                             IsActive = true,
                             NameAuthor = "Black Ajin",
@@ -254,7 +256,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 5,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7985),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7983),
                             DifferentName = "",
                             IsActive = true,
                             NameAuthor = "Đang cập nhật",
@@ -338,7 +340,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7785),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7877),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/action.svg"
@@ -346,7 +348,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7816),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7892),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/comedy.svg"
@@ -354,7 +356,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7817),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7906),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/comedy.svg"
@@ -362,7 +364,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7818),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7907),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/adventure.svg"
@@ -370,7 +372,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 5,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7819),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7908),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/romance.svg"
@@ -378,7 +380,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 6,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7821),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7908),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/horror.svg"
@@ -386,7 +388,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 7,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7822),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7909),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/mature.svg"
@@ -394,7 +396,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 8,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7823),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7910),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/comedy.svg"
@@ -402,7 +404,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 9,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7824),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7911),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/manhua.svg"
@@ -410,7 +412,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 10,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7825),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7912),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/comedy.svg"
@@ -418,7 +420,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 11,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7826),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7912),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/comedy.svg"
@@ -426,7 +428,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 12,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(7827),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(7913),
                             IsActive = true,
                             IsShowHome = true,
                             UrlImageCategory = "https://inkr.com/images/explore/comedy.svg"
@@ -542,7 +544,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 1,
                             ComicId = 1,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8255),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8088),
                             IsActive = true,
                             NameChapter = "Chapter 1",
                             SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313/chapter-1-284272",
@@ -552,7 +554,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 2,
                             ComicId = 1,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8258),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8090),
                             IsActive = true,
                             NameChapter = "Chapter 2",
                             SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313/chapter-2-524817",
@@ -562,7 +564,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 3,
                             ComicId = 1,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8261),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8092),
                             IsActive = true,
                             NameChapter = "Chapter 3",
                             SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313/chapter-3-846113",
@@ -572,7 +574,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 4,
                             ComicId = 1,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8262),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8093),
                             IsActive = true,
                             NameChapter = "Chapter 4",
                             SeoAlias = "/dau-la-dai-luc-trung-sinh-duong-tam-119313/chapter-4-247242",
@@ -582,7 +584,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 5,
                             ComicId = 2,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8263),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8094),
                             IsActive = true,
                             NameChapter = "Chapter 1",
                             SeoAlias = "/dau-pha-thuong-khung-123813/chapter-1-119211",
@@ -592,7 +594,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 6,
                             ComicId = 2,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8267),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8094),
                             IsActive = true,
                             NameChapter = "Chapter 1.5",
                             SeoAlias = "/dau-pha-thuong-khung-123813/chapter-1.5-249671",
@@ -602,7 +604,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 7,
                             ComicId = 2,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8268),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8095),
                             IsActive = true,
                             NameChapter = "Chapter 2",
                             SeoAlias = "/dau-pha-thuong-khung-123813/chapter-2-359611",
@@ -612,7 +614,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 8,
                             ComicId = 3,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8269),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8096),
                             IsActive = true,
                             NameChapter = "Chapter 1",
                             SeoAlias = "/khong-minh-thich-tiec-tung-813713/chapter-1-204813",
@@ -622,7 +624,7 @@ namespace Comic.Data.Migrations
                         {
                             Id = 9,
                             ComicId = 4,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8270),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8097),
                             IsActive = true,
                             NameChapter = "Chapter 1",
                             SeoAlias = "/anh-hung-tro-lai-590960/chapter-1-947274",
@@ -675,7 +677,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8023),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8002),
                             DifferentNameComic = "",
                             IsActive = true,
                             NameComic = "Đấu La Đại Lục Ⅴ Trùng Sinh Đường Tam",
@@ -685,7 +687,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8025),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8004),
                             DifferentNameComic = "",
                             IsActive = true,
                             NameComic = "Đấu Phá Thương Khung",
@@ -695,7 +697,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8028),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8006),
                             DifferentNameComic = "PARIPI KOUMEI; パリピ孔明",
                             IsActive = true,
                             NameComic = "Khổng Minh Thích Tiệc Tùng",
@@ -705,7 +707,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8037),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8007),
                             DifferentNameComic = "Anh Hùng Trở Về; Anh Hùng Hồi Quy; The Hero Returns",
                             IsActive = true,
                             NameComic = "Anh Hùng Trở Lại",
@@ -715,7 +717,7 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 5,
-                            DateCreated = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8049),
+                            DateCreated = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8007),
                             DifferentNameComic = "",
                             IsActive = true,
                             NameComic = "Streamer Pháp Sư",
@@ -1053,7 +1055,7 @@ namespace Comic.Data.Migrations
                             AppUserId = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
                             ChapterId = 1,
                             ComicId = 1,
-                            DateRead = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8382)
+                            DateRead = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8163)
                         },
                         new
                         {
@@ -1061,7 +1063,7 @@ namespace Comic.Data.Migrations
                             AppUserId = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
                             ChapterId = 6,
                             ComicId = 2,
-                            DateRead = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8384)
+                            DateRead = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8164)
                         });
                 });
 
@@ -1096,14 +1098,14 @@ namespace Comic.Data.Migrations
                             Id = 1,
                             AppUserId = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
                             ComicId = 1,
-                            DateFollow = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8339)
+                            DateFollow = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8144)
                         },
                         new
                         {
                             Id = 2,
                             AppUserId = new Guid("0b64f6f0-9f60-45c9-9e7b-f68ccc3fc57f"),
                             ComicId = 2,
-                            DateFollow = new DateTime(2022, 5, 10, 8, 49, 7, 965, DateTimeKind.Local).AddTicks(8346)
+                            DateFollow = new DateTime(2022, 5, 9, 22, 39, 9, 948, DateTimeKind.Local).AddTicks(8145)
                         });
                 });
 
@@ -1195,20 +1197,6 @@ namespace Comic.Data.Migrations
                         new
                         {
                             Id = 5,
-                            ChapterComicId = 5,
-                            IsActive = true,
-                            UrlImageChapterComic = "|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ChapterComicId = 5,
-                            IsActive = true,
-                            UrlImageChapterComic = "|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png"
-                        },
-                        new
-                        {
-                            Id = 7,
                             ChapterComicId = 5,
                             IsActive = true,
                             UrlImageChapterComic = "|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png|https://vcomi.co/app/manga/uploads/covers/7de8206eb99958c13cf6f55ba7efbe52.png"

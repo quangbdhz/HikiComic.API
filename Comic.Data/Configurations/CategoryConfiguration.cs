@@ -20,6 +20,8 @@ namespace Comic.Data.Configurations
             builder.Property(x => x.IsActive).IsRequired(true);
 
             builder.Property(x => x.IsShowHome).IsRequired(true);
+
+            builder.Property(x => x.UrlImageCategory).IsRequired(true).HasMaxLength(300).IsUnicode(false);
         }
     }
 }
