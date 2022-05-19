@@ -22,14 +22,14 @@ namespace Comic.BackendAPI.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("getbyid/{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var category = await _categoryService.GetById(id);
             return Ok(category);
         }
 
-        [HttpGet("getbyseoalias/{seoAlias}")]
+        [HttpGet("GetBySeoAlias/{seoAlias}")]
         public async Task<IActionResult> GetBySeoAlias(string seoAlias)
         {
             var category = await _categoryService.GetBySeoAlias(seoAlias);
@@ -40,6 +40,13 @@ namespace Comic.BackendAPI.Controllers
         public async Task<IActionResult> GetIsShowHome()
         {
             var categories = await _categoryService.GetCategoryShowHome();
+            return Ok(categories);
+        }
+
+        [HttpGet("GetBySize/{number}")]
+        public async Task<IActionResult> GetBySize(int number)
+        {
+            var categories = await _categoryService.GetBySize(number);
             return Ok(categories);
         }
     }

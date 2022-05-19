@@ -12,6 +12,7 @@
 
         public bool IsShowHome { get; set; }
 
+        public string UrlImageCategory { get; set; }
 
 
         public List<CategoryInDetailComic> CategoryInDetailComics { get; set; }

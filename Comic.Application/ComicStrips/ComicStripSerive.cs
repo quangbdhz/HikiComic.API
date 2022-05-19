@@ -210,8 +210,9 @@ namespace Comic.Application.ComicStrips
             throw new NotImplementedException();
         }
 
-        public async Task<List<ComicStripViewModel>> GetNewComicPaging()
+        public async Task<List<ComicStripViewModel>> GetNewComicPaging(PagingRequestBase request)
         {
+
             var query = from c in _context.ComicStrips
                         join dc in _context.DetailComics on c.Id equals dc.ComicId
                         where c.IsActive == true orderby c.DateCreated descending
@@ -219,7 +220,7 @@ namespace Comic.Application.ComicStrips
 
             int totalRow = await query.CountAsync();
 
-            var data = await query.Select(x => new ComicStripViewModel()
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize).Select(x => new ComicStripViewModel()
               {
                   Id = x.c.Id,
                   NameComic = x.c.NameComic,
@@ -266,7 +267,7 @@ namespace Comic.Application.ComicStrips
                 newData.Add(item);
                 count++;
 
-                if (count > 2) break;
+                if (count > 5) break;
             }
 
             return newData;

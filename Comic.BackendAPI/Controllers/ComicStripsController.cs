@@ -83,9 +83,9 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet("NewComicPaging")]
-        public async Task<IActionResult> GetNewComicPaging()
+        public async Task<IActionResult> GetNewComicPaging([FromQuery] PagingRequestBase request)
         {
-            var comicStrips = await _comicStripService.GetNewComicPaging();
+            var comicStrips = await _comicStripService.GetNewComicPaging(request);
             return Ok(comicStrips);
         }
 
