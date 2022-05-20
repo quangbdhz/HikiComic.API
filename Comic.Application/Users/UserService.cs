@@ -33,12 +33,15 @@ namespace Comic.Application.Users
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null) 
-                return new ApiErrorResult<string>("Tài khoản không tồn tại");
+                return new ApiErrorResult<string>("User Is Not Available");
+
+            if (user.IsActive == false)
+                return new ApiErrorResult<string>("User Is Locked");
 
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
             {
-                return new ApiErrorResult<string>("Đăng nhập không đúng");
+                return new ApiErrorResult<string>("Incorrect login");
             }
 
             if (user.EmailConfirmed == false)
@@ -81,9 +84,20 @@ namespace Comic.Application.Users
             return new ApiErrorResult<bool>("User Is Not Available");
         }
 
-        public Task<ApiResult<bool>> Delete(Guid id)
+        public async Task<ApiResult<bool>> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+                return new ApiErrorResult<bool>("User Is Not Available");
+
+            user.IsActive = !user.IsActive;
+
+            await _context.SaveChangesAsync();
+
+            if (!user.IsActive)
+                return new ApiSuccessResult<bool>("Delete User Is Success");
+            return new ApiSuccessResult<bool>("Activated User");
+
         }
 
         public async Task<ApiResult<UserViewModel>> GetByEmail(string email)
@@ -92,6 +106,11 @@ namespace Comic.Application.Users
             if (user == null)
             {
                 return new ApiErrorResult<UserViewModel>("User không tồn tại");
+            }
+
+            if (user.IsActive == false)
+            {
+                return new ApiErrorResult<UserViewModel>("User Is Not Active");
             }
 
             var gender = await _context.Genders.SingleOrDefaultAsync(x => x.Id == user.GenderId);
@@ -104,7 +123,8 @@ namespace Comic.Application.Users
                 UserName = user.UserName,
                 FirstName = user.FirstName,
                 Dob = user.Dob,
-                LastName = user.LastName
+                LastName = user.LastName,
+                IsActive = user.IsActive
             };
 
             if (gender != null)
@@ -123,6 +143,11 @@ namespace Comic.Application.Users
                 return new ApiErrorResult<UserViewModel>("User không tồn tại");
             }
 
+            if (user.IsActive == false)
+            {
+                return new ApiErrorResult<UserViewModel>("User Is Not Active");
+            }
+
             var gender = await _context.Genders.SingleOrDefaultAsync(x => x.Id == user.GenderId);
 
             var userVm = new UserViewModel()
@@ -133,7 +158,8 @@ namespace Comic.Application.Users
                 UserName = user.UserName,
                 FirstName = user.FirstName,
                 Dob = user.Dob,
-                LastName = user.LastName
+                LastName = user.LastName,
+                IsActive = user.IsActive
             };
 
             if(gender != null)
@@ -142,6 +168,26 @@ namespace Comic.Application.Users
             }
 
             return new ApiSuccessResult<UserViewModel>(userVm);
+        }
+
+        public async Task<List<UserViewModel>> GetUserPaging(PagingRequestBase request)
+        {
+            var query = from c in _context.Users join g in _context.Genders on c.GenderId equals g.Id select new { c , g };
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize).Select(x => new UserViewModel()
+            {
+                Id = x.c.Id,
+                Email = x.c.Email,
+                PhoneNumber = x.c.PhoneNumber,
+                UserName = x.c.UserName,
+                FirstName = x.c.FirstName,
+                Dob = x.c.Dob,
+                LastName = x.c.LastName,
+                Gender = x.g.NameGender,
+                IsActive = x.c.IsActive
+            }).ToListAsync();
+
+            return data;
         }
 
         public async Task<ApiResult<UserViewModel>> Register(RegisterRequest request)
@@ -179,9 +225,22 @@ namespace Comic.Application.Users
         }
 
 
-        public Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request)
+        public async Task<ApiResult<bool>> Update(UserUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(request.Id.ToString());
+            if (user == null)
+                return new ApiErrorResult<bool>("User Is Not Available");
+
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.PhoneNumber = request.PhoneNumber;
+            user.GenderId = request.GenderId;
+            user.Dob = request.Dob;
+
+            await _context.SaveChangesAsync();
+
+            return new ApiSuccessResult<bool>("Update User Is Success");
+
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using Comic.Application.ComicStrips;
 using Comic.ViewModels.ComicStrips.ComicStripRequest;
 using Comic.ViewModels.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Comic.BackendAPI.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ComicStripsController : ControllerBase
     {
@@ -17,7 +19,8 @@ namespace Comic.BackendAPI.Controllers
             _comicStripService = comicStripService;
         }
 
-        [HttpGet("paging")]
+        [HttpGet("Paging")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllPaging([FromQuery] ComicStripPagingRequest request)
         {
             var comicStrips = await _comicStripService.GetAllPaging(request);
@@ -26,6 +29,7 @@ namespace Comic.BackendAPI.Controllers
 
         [HttpPost]
         [Consumes("multipart/form-data")]
+        [AllowAnonymous]
         public async Task<ApiResult<bool>> Create([FromForm] ComicStripCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -72,6 +76,7 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpDelete("{comicStripId}")]
+        [AllowAnonymous]
         public async Task<ApiResult<bool>> DeleteComicStrip(int comicStripId)
         {
             if (!ModelState.IsValid)
@@ -95,5 +100,22 @@ namespace Comic.BackendAPI.Controllers
             var comicStrips = await _comicStripService.GetHotComicPaging();
             return Ok(comicStrips);
         }
+
+        [HttpPost("Update")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Update([FromForm] ComicStripUpdateRequest request)
+        {
+            var comicStrips = await _comicStripService.Update(request);
+            return Ok(comicStrips);
+        }
+
+        [HttpGet("PagingManager")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllPagingManager([FromQuery] ComicStripPagingRequest request)
+        {
+            var comicStrips = await _comicStripService.GetAllPagingManager(request);
+            return Ok(comicStrips);
+        }
+
     }
 }
