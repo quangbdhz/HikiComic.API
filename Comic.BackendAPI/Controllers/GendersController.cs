@@ -1,6 +1,4 @@
 ﻿using Comic.Application.Genders;
-using Comic.Data.EF;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Comic.BackendAPI.Controllers
@@ -11,19 +9,23 @@ namespace Comic.BackendAPI.Controllers
     {
         private readonly IGenderService _genderService;
 
-        private readonly ComicDbContext _context;
-
-        public GendersController(IGenderService genderService, ComicDbContext context)
+        public GendersController(IGenderService genderService)
         {
             _genderService = genderService;
-            _context = context;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll(int idGender)
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
         {
-            var genders = await _genderService.GetById(idGender);
+            var genders = await _genderService.GetAll();
             return Ok(genders);
+        }
+
+        [HttpGet("GetById/{idGender}")]
+        public async Task<IActionResult> GetById(int idGender)
+        {
+            var gender = await _genderService.GetById(idGender);
+            return Ok(gender);
         }
     }
 }

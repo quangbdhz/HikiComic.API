@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Comic.Data\Comic.Data.csproj" />
+    <ProjectReference Include="..\Comic.Utilities\Comic.Utilities.csproj" />
     <ProjectReference Include="..\Comic.ViewModels\Comic.ViewModels.csproj" />
   </ItemGroup>
 

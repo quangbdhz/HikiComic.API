@@ -267,7 +267,7 @@ namespace Comic.Application.ComicStrips
                 newData.Add(item);
                 count++;
 
-                if (count > 2) break;
+                if (count > 5) break;
             }
 
             return newData;
