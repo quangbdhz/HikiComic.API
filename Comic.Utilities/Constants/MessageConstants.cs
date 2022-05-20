@@ -11,5 +11,7 @@
         public static string UserCreatedverifyMail = "User created, Check mail. Click link and verify.";
 
         public static string UserConfirmMailError = "Email verification failed";
+        public static string UserIsNotAvailable = "User Is Not Available";
+
     }
 }

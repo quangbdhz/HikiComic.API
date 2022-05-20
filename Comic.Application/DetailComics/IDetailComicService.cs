@@ -1,4 +1,5 @@
-﻿using Comic.ViewModels.DetailComics;
+﻿using Comic.ViewModels.Common;
+using Comic.ViewModels.DetailComics;
 
 namespace Comic.Application.DetailComics
 {
@@ -8,5 +9,10 @@ namespace Comic.Application.DetailComics
 
         Task<DetailComicViewModel> GetBySeoAlias(string seoAlias);
 
+        Task<DetailComicViewModel> GetById(Guid userId, int id);
+
+        Task<DetailComicViewModel> GetBySeoAlias(Guid userId, string seoAlias);
+
+        Task<ApiResult<bool>> UpdateUserFollowComic(Guid userId, int comicId);
     }
 }
