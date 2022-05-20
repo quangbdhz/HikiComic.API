@@ -43,7 +43,7 @@ namespace Comic.BackendAPI.Controllers
             return new ApiErrorResult<bool>("Error");
         }
 
-        [HttpPatch("{comicStripId}")]
+        [HttpPatch("AddViewCount/{comicStripId}")]
         public async Task<ApiResult<bool>> AddViewCount(int comicStripId)
         {
             if (!ModelState.IsValid)

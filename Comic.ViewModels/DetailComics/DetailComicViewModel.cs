@@ -31,6 +31,7 @@ namespace Comic.ViewModels.DetailComics
 
         public string Status { get; set; }
 
+        public bool IsFollow { get; set; }
 
         public List<AuthorViewModel> Authors { get; set; } = new List<AuthorViewModel>();
 
