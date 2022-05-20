@@ -8,7 +8,7 @@ namespace Comic.Application.ComicStrips
     {
         Task<int> Create(ComicStripCreateRequest request);
 
-        Task<int> Update(ComicStripUpdateRequest request);
+        Task<ApiResult<bool>> Update(ComicStripUpdateRequest request);
 
         Task<ApiResult<bool>> Delete(int comicStripId);
 
@@ -21,5 +21,7 @@ namespace Comic.Application.ComicStrips
         Task<List<ComicStripViewModel>> GetNewComicPaging(PagingRequestBase request);
 
         Task<List<ComicStripViewModel>> GetHotComicPaging();
+
+        Task<PagedResult<ComicStripViewModel>> GetAllPagingManager(ComicStripPagingRequest request);
     }
 }

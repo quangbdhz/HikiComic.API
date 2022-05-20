@@ -21,5 +21,7 @@ namespace Comic.Application.Categories
         Task<ApiResult<bool>> UpdateCategory(UpdateCategoryRequest updateCategoryRequest);
 
         Task<ApiResult<bool>> DeleteCategory(int categoryId);
+
+        Task<PagedResult<CategoryViewModel>> GetAllPagingManager(PagingRequestBase request);
     }
 }

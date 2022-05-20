@@ -2,12 +2,12 @@
 using Comic.ViewModels.Categories.CategoryDataRequest;
 using Comic.ViewModels.Common;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Comic.BackendAPI.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -30,7 +30,7 @@ namespace Comic.BackendAPI.Controllers
         {
             var category = await _categoryService.GetById(id);
 
-            if(category == null)
+            if (category == null)
                 return NotFound();
 
             return Ok(category);
@@ -63,7 +63,7 @@ namespace Comic.BackendAPI.Controllers
 
         [HttpPost("AddCategory")]
         [AllowAnonymous]
-        public async Task<ApiResult<bool>> UpdateCategory([FromBody] AddCategoryRequest request)
+        public async Task<ApiResult<bool>> AddCategrory([FromBody] AddCategoryRequest request)
         {
             if (!ModelState.IsValid)
                 return new ApiErrorResult<bool>("ModelState IsValid");
@@ -85,6 +85,13 @@ namespace Comic.BackendAPI.Controllers
         public async Task<ApiResult<bool>> DeleteCategory(int categoryId)
         {
             return await _categoryService.DeleteCategory(categoryId);
+        }
+
+        [HttpGet("PagingManager")]
+        public async Task<IActionResult> GetNewComicPaging([FromQuery] PagingRequestBase request)
+        {
+            var categories = await _categoryService.GetAllPagingManager(request);
+            return Ok(categories);
         }
     }
 }

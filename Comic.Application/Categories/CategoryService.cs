@@ -45,7 +45,7 @@ namespace Comic.Application.Categories
         {
             var query = from c in _context.Categories where c.IsActive == true join dc in _context.DetailCategories on c.Id equals dc.CategoryId select new { c, dc };
 
-            return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory }).ToListAsync();
+            return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory, IsActive = x.c.IsActive }).ToListAsync();
 
         }
 
@@ -53,7 +53,7 @@ namespace Comic.Application.Categories
         {
             var query = from c in _context.Categories where c.IsActive == true join dc in _context.DetailCategories on c.Id equals dc.CategoryId where c.Id == id select new { c, dc };
 
-            return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory }).FirstOrDefaultAsync();
+            return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory, IsActive = x.c.IsActive }).FirstOrDefaultAsync();
 
         }
 
@@ -73,7 +73,7 @@ namespace Comic.Application.Categories
 
             if(number > 0)
             {
-                var categories = await query.Take(number).Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory }).ToListAsync();
+                var categories = await query.Take(number).Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory, IsActive = x.c.IsActive }).ToListAsync();
                 return categories;
             }
             return null;
@@ -83,7 +83,7 @@ namespace Comic.Application.Categories
         {
             var query = from c in _context.Categories where c.IsActive == true join dc in _context.DetailCategories on c.Id equals dc.CategoryId where c.IsShowHome == true select new { c, dc };
 
-            return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory }).ToListAsync();
+            return await query.Select(x => new CategoryViewModel() { Id = x.c.Id, Name = x.dc.NameCategory, SeoAlias = x.dc.SeoAlias, ParentId = x.c.ParentId, UrlImageCategory = x.c.UrlImageCategory, IsActive = x.c.IsActive }).ToListAsync();
         }
 
         public async Task<ApiResult<bool>> UpdateCategory(UpdateCategoryRequest updateCategoryRequest)
@@ -135,6 +135,33 @@ namespace Comic.Application.Categories
             await _context.SaveChangesAsync();
 
             return new ApiSuccessResult<bool>("Delete Category Is Success");
+        }
+
+        public async Task<PagedResult<CategoryViewModel>> GetAllPagingManager(PagingRequestBase request)
+        {
+            var query = from c in _context.Categories join dc in _context.DetailCategories on c.Id equals dc.CategoryId select new { c, dc };
+            int totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+                 .Select(x => new CategoryViewModel()
+                 {
+                     Id = x.c.Id,
+                     Name = x.dc.NameCategory,
+                     SeoAlias = x.dc.SeoAlias,
+                     ParentId = x.c.ParentId,
+                     UrlImageCategory = x.c.UrlImageCategory,
+                     IsActive = x.c.IsActive
+                 }).ToListAsync();
+
+            var pagedResult = new PagedResult<CategoryViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+
+            return pagedResult;
+
         }
     }
 }

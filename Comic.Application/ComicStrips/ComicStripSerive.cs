@@ -20,7 +20,7 @@ namespace Comic.Application.ComicStrips
         public async Task<int> AddViewcount(int comicStripId)
         {
             var comicStrip = await _context.ComicStrips.FindAsync(comicStripId);
-            if(comicStrip != null)
+            if (comicStrip != null)
             {
                 comicStrip.ViewCount += 1;
                 await _context.SaveChangesAsync();
@@ -33,7 +33,7 @@ namespace Comic.Application.ComicStrips
         {
             var detailComic = await _context.DetailComics.SingleOrDefaultAsync(x => x.ComicId == comicStripId);
 
-            if(detailComic == null)
+            if (detailComic == null)
             {
                 return new ApiErrorResult<bool>("ComicStrip Is Null");
             }
@@ -84,7 +84,7 @@ namespace Comic.Application.ComicStrips
             _context.DetailComics.Add(detailComic);
             await _context.SaveChangesAsync();
 
-            if(countAuthor > 0)
+            if (countAuthor > 0)
             {
                 var authorInDetailComic = new AuthorInDetailComic();
                 foreach (var item in request.Authors)
@@ -98,7 +98,7 @@ namespace Comic.Application.ComicStrips
                 }
             }
 
-            if(countCategory > 0)
+            if (countCategory > 0)
             {
                 var categoryInDetailComic = new CategoryInDetailComic();
                 foreach (var item in request.Categories)
@@ -119,95 +119,45 @@ namespace Comic.Application.ComicStrips
         {
             var comicStrip = await _context.ComicStrips.SingleOrDefaultAsync(x => x.Id == comicStripId);
 
-            if(comicStrip == null)
+            if (comicStrip == null)
                 return new ApiErrorResult<bool>("ComicStrip Is Null");
 
-            comicStrip.IsActive = false;
+            comicStrip.IsActive = !comicStrip.IsActive;
             await _context.SaveChangesAsync();
 
-            return new ApiSuccessResult<bool>();
+            if (!comicStrip.IsActive)
+                return new ApiSuccessResult<bool>("Delete Comic Is Success");
+
+            return new ApiSuccessResult<bool>("Activated Comic");
         }
 
         public async Task<PagedResult<ComicStripViewModel>> GetAllPaging(ComicStripPagingRequest request)
         {
-            if (request.CategoryId != null && request.CategoryId != 0)
-            {
-                var query = from c in _context.ComicStrips
-                            join dc in _context.DetailComics on c.Id equals dc.ComicId
-                            join cidc in _context.CategoryInDetailComics on dc.Id equals cidc.DetailComicId
-                            where c.IsActive == true
-                            select new { c, dc, cidc };
-
-                query = query.Where(p => p.cidc.CategoryId == request.CategoryId);
-
-                if (!string.IsNullOrEmpty(request.Keyword))
-                    query = query.Where(x => x.c.NameComic.Contains(request.Keyword));
-
-                int totalRow = await query.CountAsync();
-
-                var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
-                  .Select(x => new ComicStripViewModel()
-                  {
-                      Id = x.c.Id,
-                      NameComic = x.c.NameComic,
-                      DateCreated = x.c.DateCreated,
-                      DifferentNameComic = x.c.DifferentNameComic,
-                      ViewCount = x.c.ViewCount,
-                      UrlCoverImageComic = x.c.UrlCoverImageComic,
-                      IdNewChapter = x.c.IdNewChapter,
-                      SeoAlias = x.dc.SeoAlias,
-                      Rating = x.dc.Rating
-                  }).ToListAsync();
-
-                var pagedResult = new PagedResult<ComicStripViewModel>()
-                {
-                    TotalRecords = totalRow,
-                    PageSize = request.PageSize,
-                    PageIndex = request.PageIndex,
-                    Items = data
-                };
-                return pagedResult;
-            }
-            else
-            {
-                var query = from c in _context.ComicStrips
-                            join dc in _context.DetailComics on c.Id equals dc.ComicId
-                            where c.IsActive == true
-                            select new { c, dc };
-
-                if (!string.IsNullOrEmpty(request.Keyword))
-                    query = query.Where(x => x.c.NameComic.Contains(request.Keyword));
-
-                int totalRow = await query.CountAsync();
-
-                var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
-                  .Select(x => new ComicStripViewModel()
-                  {
-                      Id = x.c.Id,
-                      NameComic = x.c.NameComic,
-                      DateCreated = x.c.DateCreated,
-                      DifferentNameComic = x.c.DifferentNameComic,
-                      ViewCount = x.c.ViewCount,
-                      UrlCoverImageComic = x.c.UrlCoverImageComic,
-                      IdNewChapter = x.c.IdNewChapter,
-                      SeoAlias = x.dc.SeoAlias,
-                      Rating = x.dc.Rating
-                  }).ToListAsync();
-
-                var pagedResult = new PagedResult<ComicStripViewModel>()
-                {
-                    TotalRecords = totalRow,
-                    PageSize = request.PageSize,
-                    PageIndex = request.PageIndex,
-                    Items = data
-                };
-                return pagedResult;
-            }
+            return await GetComicStripViewModel(1, request);
         }
 
-        public Task<int> Update(ComicStripUpdateRequest request)
+        public async Task<ApiResult<bool>> Update(ComicStripUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var comic = await _context.ComicStrips.SingleOrDefaultAsync(x => x.Id == request.ComicId);
+            if (comic == null)
+                return new ApiErrorResult<bool>("Comic Is Not Available");
+
+            comic.DifferentNameComic = request.DifferentNameComic;
+            comic.UrlCoverImageComic = request.UrlCoverImageComic;
+            await _context.SaveChangesAsync();
+
+            var detailComic = await _context.DetailComics.SingleOrDefaultAsync(x => x.ComicId == request.ComicId);
+            if (detailComic != null)
+            {
+                detailComic.SeoTitle = request.SeoTitle;
+                detailComic.SeoDescription = request.SeoDescription;
+                detailComic.Description = request.Description;
+
+                await _context.SaveChangesAsync();
+
+                return new ApiSuccessResult<bool>("Update Comic Is Success");
+            }
+            return new ApiErrorResult<bool>("DetailComic Is Not Available");
         }
 
         public async Task<List<ComicStripViewModel>> GetNewComicPaging(PagingRequestBase request)
@@ -221,17 +171,17 @@ namespace Comic.Application.ComicStrips
             int totalRow = await query.CountAsync();
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize).Select(x => new ComicStripViewModel()
-              {
-                  Id = x.c.Id,
-                  NameComic = x.c.NameComic,
-                  DateCreated = x.c.DateCreated,
-                  DifferentNameComic = x.c.DifferentNameComic,
-                  ViewCount = x.c.ViewCount,
-                  UrlCoverImageComic = x.c.UrlCoverImageComic,
-                  IdNewChapter = x.c.IdNewChapter,
-                  SeoAlias = x.dc.SeoAlias,
-                  Rating = x.dc.Rating
-              }).ToListAsync();
+            {
+                Id = x.c.Id,
+                NameComic = x.c.NameComic,
+                DateCreated = x.c.DateCreated,
+                DifferentNameComic = x.c.DifferentNameComic,
+                ViewCount = x.c.ViewCount,
+                UrlCoverImageComic = x.c.UrlCoverImageComic,
+                IdNewChapter = x.c.IdNewChapter,
+                SeoAlias = x.dc.SeoAlias,
+                Rating = x.dc.Rating
+            }).ToListAsync();
 
             return data;
         }
@@ -262,7 +212,7 @@ namespace Comic.Application.ComicStrips
             List<ComicStripViewModel> newData = new List<ComicStripViewModel>();
 
             int count = 0;
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 newData.Add(item);
                 count++;
@@ -272,5 +222,98 @@ namespace Comic.Application.ComicStrips
 
             return newData;
         }
+
+        public async Task<PagedResult<ComicStripViewModel>> GetAllPagingManager(ComicStripPagingRequest request)
+        {
+            return await GetComicStripViewModel(0, request);
+        }
+
+        public async Task<PagedResult<ComicStripViewModel>> GetComicStripViewModel(int option, ComicStripPagingRequest request)
+        {
+            if (request.CategoryId != null && request.CategoryId != 0)
+            {
+                var query = from c in _context.ComicStrips
+                            join dc in _context.DetailComics on c.Id equals dc.ComicId
+                            join cidc in _context.CategoryInDetailComics on dc.Id equals cidc.DetailComicId
+                            select new { c, dc, cidc };
+
+                if(option == 1)
+                {
+                    query = query.Where(x => x.c.IsActive == true);
+                }
+
+                query = query.Where(p => p.cidc.CategoryId == request.CategoryId);
+
+                if (!string.IsNullOrEmpty(request.Keyword))
+                    query = query.Where(x => x.c.NameComic.Contains(request.Keyword));
+
+                int totalRow = await query.CountAsync();
+
+                var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+                  .Select(x => new ComicStripViewModel()
+                  {
+                      Id = x.c.Id,
+                      NameComic = x.c.NameComic,
+                      DateCreated = x.c.DateCreated,
+                      DifferentNameComic = x.c.DifferentNameComic,
+                      ViewCount = x.c.ViewCount,
+                      UrlCoverImageComic = x.c.UrlCoverImageComic,
+                      IdNewChapter = x.c.IdNewChapter,
+                      SeoAlias = x.dc.SeoAlias,
+                      Rating = x.dc.Rating,
+                      IsActive = x.c.IsActive
+                  }).ToListAsync();
+
+                var pagedResult = new PagedResult<ComicStripViewModel>()
+                {
+                    TotalRecords = totalRow,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    Items = data
+                };
+                return pagedResult;
+            }
+            else
+            {
+                var query = from c in _context.ComicStrips
+                            join dc in _context.DetailComics on c.Id equals dc.ComicId
+                            select new { c, dc };
+
+                if (option == 1)
+                {
+                    query = query.Where(x => x.c.IsActive == true);
+                }
+
+                if (!string.IsNullOrEmpty(request.Keyword))
+                    query = query.Where(x => x.c.NameComic.Contains(request.Keyword));
+
+                int totalRow = await query.CountAsync();
+
+                var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+                  .Select(x => new ComicStripViewModel()
+                  {
+                      Id = x.c.Id,
+                      NameComic = x.c.NameComic,
+                      DateCreated = x.c.DateCreated,
+                      DifferentNameComic = x.c.DifferentNameComic,
+                      ViewCount = x.c.ViewCount,
+                      UrlCoverImageComic = x.c.UrlCoverImageComic,
+                      IdNewChapter = x.c.IdNewChapter,
+                      SeoAlias = x.dc.SeoAlias,
+                      Rating = x.dc.Rating,
+                      IsActive = x.c.IsActive
+                  }).ToListAsync();
+
+                var pagedResult = new PagedResult<ComicStripViewModel>()
+                {
+                    TotalRecords = totalRow,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    Items = data
+                };
+                return pagedResult;
+            }
+        }
+
     }
 }
