@@ -8,9 +8,11 @@ namespace Comic.Application.Users
     {
         Task<ApiResult<string>> Authencate(LoginRequest request);
 
+        Task<List<UserViewModel>> GetUserPaging(PagingRequestBase request);
+
         Task<ApiResult<UserViewModel>> Register(RegisterRequest request);
 
-        Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
+        Task<ApiResult<bool>> Update(UserUpdateRequest request);
 
         Task<ApiResult<UserViewModel>> GetById(Guid id);
 

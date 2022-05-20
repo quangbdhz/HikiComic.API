@@ -96,5 +96,40 @@ namespace Comic.BackendAPI.Controllers
             var result = await _userService.ConfirmMail(userName);
             return result;
         }
+
+        [HttpPost("Update")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Update([FromBody] UserUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.Update(request);
+
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.Message);
+
+        }
+
+        [HttpDelete("Delete/{userId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Delete(Guid userId)
+        {
+            var result = await _userService.Delete(userId);
+            return Ok(result.Message);
+        }
+
+        [HttpGet("UserPaging")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UserPaging([FromQuery] PagingRequestBase request)
+        {
+            var comicStrips = await _userService.GetUserPaging(request);
+            return Ok(comicStrips);
+        }
+
     }
 }

@@ -27,5 +27,7 @@ namespace Comic.ViewModels.Users
         [Display(Name = "Giới tính")]
         public string? Gender { get; set; }
 
+        public bool IsActive { get; set; }
+
     }
 }
