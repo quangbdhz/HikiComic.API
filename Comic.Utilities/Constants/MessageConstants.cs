@@ -2,6 +2,8 @@
 {
     public class MessageConstants
     {
+        public const string MainConnectionString = "ComicDB";
+
         public static string Success = "Success";
         public static string ErrorFound = "Error Found";
         public static string UserAlreadyCreated = "User already created, please login.";

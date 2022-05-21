@@ -17,12 +17,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Comic.Utilities.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var connectionString = builder.Configuration.GetConnectionString("ComicDB");
+var connectionString = builder.Configuration.GetConnectionString(MessageConstants.MainConnectionString);
 builder.Services.AddDbContext<ComicDbContext>(x => x.UseSqlServer(connectionString));
 
 builder.Services.AddIdentity<AppUser, AppRole>()
