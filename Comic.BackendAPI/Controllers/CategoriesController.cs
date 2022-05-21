@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Comic.BackendAPI.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -19,6 +19,7 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var categories = await _categoryService.GetAll();
@@ -26,6 +27,7 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet("GetById/{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetById(int id)
         {
             var category = await _categoryService.GetById(id);
@@ -37,6 +39,7 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet("GetBySeoAlias/{seoAlias}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetBySeoAlias(string seoAlias)
         {
             var category = await _categoryService.GetBySeoAlias(seoAlias);
@@ -48,6 +51,7 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet("IsShowHome")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetIsShowHome()
         {
             var categories = await _categoryService.GetCategoryShowHome();
@@ -55,14 +59,14 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet("GetBySize/{number}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetBySize(int number)
         {
             var categories = await _categoryService.GetBySize(number);
             return Ok(categories);
         }
 
-        [HttpPost("AddCategory")]
-        [AllowAnonymous]
+        [HttpPost("Add")]
         public async Task<ApiResult<bool>> AddCategrory([FromBody] AddCategoryRequest request)
         {
             if (!ModelState.IsValid)
@@ -71,8 +75,7 @@ namespace Comic.BackendAPI.Controllers
             return await _categoryService.AddCategrory(request);
         }
 
-        [HttpPost("UpdateCategory")]
-        [AllowAnonymous]
+        [HttpPost("Update")]
         public async Task<ApiResult<bool>> UpdateCategory([FromBody] UpdateCategoryRequest request)
         {
             if (!ModelState.IsValid)

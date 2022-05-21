@@ -1,4 +1,5 @@
-﻿using Comic.ViewModels.Common;
+﻿using Comic.Data.Entities;
+using Comic.ViewModels.Common;
 using Comic.ViewModels.Users;
 using Comic.ViewModels.Users.UserDataRequest;
 
@@ -6,7 +7,9 @@ namespace Comic.Application.Users
 {
     public interface IUserService
     {
-        Task<ApiResult<string>> Authencate(LoginRequest request);
+        Task<ApiResult<UserViewModel>> Login(LoginRequest request);
+
+        Task<string> CreateToken(AppUser user);
 
         Task<List<UserViewModel>> GetUserPaging(PagingRequestBase request);
 
@@ -22,5 +25,8 @@ namespace Comic.Application.Users
 
         Task<ApiResult<bool>> ConfirmMail(string userName);
 
+        Task<ApiResult<bool>> RefreshToken(Guid userId, string? refreshToken);
+
+        Task<ApiResult<bool>> SetRefreshToken(Guid userId, string refreshToken, DateTime tokenCreated, DateTime tokenExpires);
     }
 }

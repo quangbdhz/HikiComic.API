@@ -29,31 +29,38 @@ namespace Comic.Application.Users
             _context = context;
         }
 
-        public async Task<ApiResult<string>> Authencate(LoginRequest request)
+        public async Task<ApiResult<UserViewModel>> Login(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null) 
-                return new ApiErrorResult<string>("User Is Not Available");
+            if (user == null)
+                return new ApiErrorResult<UserViewModel>("User Is Not Available");
 
             if (user.IsActive == false)
-                return new ApiErrorResult<string>("User Is Locked");
+                return new ApiErrorResult<UserViewModel>("User Is Locked");
 
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
             {
-                return new ApiErrorResult<string>("Incorrect login");
+                return new ApiErrorResult<UserViewModel>("Incorrect login");
             }
 
-            if (user.EmailConfirmed == false)
-                return new ApiErrorResult<string>(MessageConstants.UserCreatedverifyMail);
+            string token = await CreateToken(user);
 
+            var userViewModel = new UserViewModel() { Id = user.Id };
+
+            return new ApiSuccessResult<UserViewModel>(token) { ResultObj = userViewModel };
+        }
+
+
+        public async Task<string> CreateToken(AppUser user)
+        {
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
             {
                 new Claim(ClaimTypes.Email,user.Email),
                 new Claim(ClaimTypes.Name,user.Id.ToString()),
                 new Claim(ClaimTypes.Role, string.Join(";",roles)),
-                new Claim(ClaimTypes.Name, request.UserName)
+                new Claim(ClaimTypes.Name, user.UserName)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -61,16 +68,19 @@ namespace Comic.Application.Users
             var token = new JwtSecurityToken(_config["Tokens:Issuer"],
                 _config["Tokens:Issuer"],
                 claims,
-                expires: DateTime.Now.AddHours(3),
+                expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: creds);
 
-            return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
         }
+
 
         public async Task<ApiResult<bool>> ConfirmMail(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
-            if(user != null)
+            if (user != null)
             {
                 user.EmailConfirmed = true;
                 var result = await _userManager.UpdateAsync(user);
@@ -162,7 +172,7 @@ namespace Comic.Application.Users
                 IsActive = user.IsActive
             };
 
-            if(gender != null)
+            if (gender != null)
             {
                 userVm.Gender = gender.NameGender;
             }
@@ -172,7 +182,7 @@ namespace Comic.Application.Users
 
         public async Task<List<UserViewModel>> GetUserPaging(PagingRequestBase request)
         {
-            var query = from c in _context.Users join g in _context.Genders on c.GenderId equals g.Id select new { c , g };
+            var query = from c in _context.Users join g in _context.Genders on c.GenderId equals g.Id select new { c, g };
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize).Select(x => new UserViewModel()
             {
@@ -217,13 +227,12 @@ namespace Comic.Application.Users
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
-                UserViewModel userViewModel = new UserViewModel() { Id = user.Id, Dob = user.Dob, Email = user.Email, UserName = user.UserName, FirstName = user.FirstName, Gender = "", LastName = user.LastName, PhoneNumber = user.PhoneNumber  };
+                UserViewModel userViewModel = new UserViewModel() { Id = user.Id, Dob = user.Dob, Email = user.Email, UserName = user.UserName, FirstName = user.FirstName, Gender = "", LastName = user.LastName, PhoneNumber = user.PhoneNumber };
                 return new ApiSuccessResult<UserViewModel>() { ResultObj = userViewModel };
             }
 
             return new ApiErrorResult<UserViewModel>("Đăng ký không thành công");
         }
-
 
         public async Task<ApiResult<bool>> Update(UserUpdateRequest request)
         {
@@ -241,6 +250,40 @@ namespace Comic.Application.Users
 
             return new ApiSuccessResult<bool>("Update User Is Success");
 
+        }
+
+        public async Task<ApiResult<bool>> RefreshToken(Guid userId, string? refreshToken)
+        {
+            if (string.IsNullOrEmpty(refreshToken))
+               return new ApiErrorResult<bool>();
+
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user.RefreshToken != refreshToken)
+                return new ApiErrorResult<bool>("Invalid Refresh Token.");
+
+            if (user.TokenExpires < DateTime.Now)
+                return new ApiErrorResult<bool>("Token expired.");
+
+            string token = await CreateToken(user);
+
+            return new ApiSuccessResult<bool>(token);
+        }
+
+        public async Task<ApiResult<bool>> SetRefreshToken(Guid userId, string refreshToken, DateTime tokenCreated, DateTime tokenExpires)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+                return new ApiErrorResult<bool>("User Is Not Available");
+
+            user.RefreshToken = refreshToken;
+            user.TokenCreated = tokenCreated;
+            user.TokenExpires = tokenExpires;
+
+            await _context.SaveChangesAsync();
+
+            return new ApiSuccessResult<bool>("Set RefreshToken Is Success");
         }
     }
 }
