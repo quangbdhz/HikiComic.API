@@ -1,11 +1,13 @@
 ﻿using Comic.Application.HistoryReadComicOfUsers;
 using Comic.ViewModels.Common;
 using Comic.ViewModels.HistoryReadComicOfUsers.HistoryReadComicOfUserRequest;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Comic.BackendAPI.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class HistoryReadComicOfUsersController : ControllerBase
     {

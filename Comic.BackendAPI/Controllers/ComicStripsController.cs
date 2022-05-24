@@ -27,9 +27,8 @@ namespace Comic.BackendAPI.Controllers
             return Ok(comicStrips);
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         [Consumes("multipart/form-data")]
-        [AllowAnonymous]
         public async Task<ApiResult<bool>> Create([FromForm] ComicStripCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -48,6 +47,7 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpPatch("AddViewCount/{comicStripId}")]
+        [AllowAnonymous]
         public async Task<ApiResult<bool>> AddViewCount(int comicStripId)
         {
             if (!ModelState.IsValid)
@@ -64,7 +64,7 @@ namespace Comic.BackendAPI.Controllers
 
         }
 
-        [HttpPost("{comicStripId}/{rating}")]
+        [HttpPost("Rating/{comicStripId}/{rating}")]
         public async Task<ApiResult<bool>> AddRatingComic(int comicStripId, double rating)
         {
             if (!ModelState.IsValid)
@@ -75,8 +75,7 @@ namespace Comic.BackendAPI.Controllers
             return await _comicStripService.AddRating(comicStripId, rating);
         }
 
-        [HttpDelete("{comicStripId}")]
-        [AllowAnonymous]
+        [HttpDelete("Delete/{comicStripId}")]
         public async Task<ApiResult<bool>> DeleteComicStrip(int comicStripId)
         {
             if (!ModelState.IsValid)
@@ -88,6 +87,7 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet("NewComicPaging")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetNewComicPaging([FromQuery] PagingRequestBase request)
         {
             var comicStrips = await _comicStripService.GetNewComicPaging(request);
@@ -95,6 +95,7 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet("HotComicPaging")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetHotComicPaging()
         {
             var comicStrips = await _comicStripService.GetHotComicPaging();
@@ -102,7 +103,6 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpPost("Update")]
-        [AllowAnonymous]
         public async Task<IActionResult> Update([FromForm] ComicStripUpdateRequest request)
         {
             var comicStrips = await _comicStripService.Update(request);
@@ -110,7 +110,6 @@ namespace Comic.BackendAPI.Controllers
         }
 
         [HttpGet("PagingManager")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAllPagingManager([FromQuery] ComicStripPagingRequest request)
         {
             var comicStrips = await _comicStripService.GetAllPagingManager(request);
