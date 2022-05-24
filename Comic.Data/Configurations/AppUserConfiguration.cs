@@ -23,6 +23,14 @@ namespace Comic.Data.Configurations
             builder.Property(x => x.IsActive).HasDefaultValue(true).IsRequired(true);
 
             builder.HasOne(x => x.Gender).WithMany(x => x.AppUsers).HasForeignKey(x => x.GenderId);
+
+            builder.Property(x => x.RefreshToken).IsRequired(false).HasMaxLength(1000).IsUnicode(false);
+
+            builder.Property(x => x.TokenCreated).IsRequired(false);
+
+            builder.Property(x => x.TokenExpires).IsRequired(false);
+            
+
         }
     }
 }

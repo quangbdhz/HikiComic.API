@@ -1,5 +1,6 @@
 ﻿using Comic.Application.MailConfirms;
 using Comic.Application.Users;
+using Comic.BackendAPI.Models;
 using Comic.Utilities.Constants;
 using Comic.ViewModels.Common;
 using Comic.ViewModels.MailConfirms;
@@ -8,6 +9,7 @@ using Comic.ViewModels.Users.UserDataRequest;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Security.Cryptography;
 
 namespace Comic.BackendAPI.Controllers
 {
@@ -25,21 +27,81 @@ namespace Comic.BackendAPI.Controllers
             _emailConfirmService = emailConfirmService;
         }
 
-        [HttpPost("authenticate")]
+        [HttpPost("Login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Authenticate([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _userService.Authencate(request);
+            var result = await _userService.Login(request);
 
-            if (string.IsNullOrEmpty(result.ResultObj))
+            if (string.IsNullOrEmpty(result.Message))
             {
-                return BadRequest(result);
+                return BadRequest("Token Is Null");
             }
-            return Ok(result);
+
+            var refreshToken = GenerateRefreshToken();
+            int outputRefreshToken = await SetRefreshToken(refreshToken, result.ResultObj.Id);
+
+            if (outputRefreshToken == 1)
+                return Ok(result);
+
+            return BadRequest("Exception");
         }
+
+        [HttpPost("{userId}/RefreshToken")]
+        public async Task<ActionResult<string>> RefreshToken(Guid userId)
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            var result = await _userService.RefreshToken(userId, refreshToken);
+
+            var newRefreshToken = GenerateRefreshToken();
+
+            int outputRefreshToken = await SetRefreshToken(newRefreshToken, userId);
+            if(outputRefreshToken == 1)
+                return Ok(result);
+
+            return BadRequest("Exception");
+        }
+
+        [NonAction]
+        private RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expires = DateTime.Now.AddDays(7),
+                Created = DateTime.Now
+            };
+
+            return refreshToken;
+        }
+
+        [NonAction]
+        private async Task<int> SetRefreshToken(RefreshToken newRefreshToken, Guid userId)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expires   
+            };
+            Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+
+            await _userService.SetRefreshToken(userId, newRefreshToken.Token, newRefreshToken.Created, newRefreshToken.Expires);
+
+            return 1;
+        }
+
+        //[NonAction]
+        //private string ipAddress()
+        //{
+        //    if (Request.Headers.ContainsKey("X-Forwarded-For"))
+        //        return Request.Headers["X-Forwarded-For"];
+        //    else
+        //        return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+        //}
 
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetById(Guid id)
@@ -96,5 +158,38 @@ namespace Comic.BackendAPI.Controllers
             var result = await _userService.ConfirmMail(userName);
             return result;
         }
+
+        [HttpPost("Update")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Update([FromBody] UserUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.Update(request);
+
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.Message);
+
+        }
+
+        [HttpDelete("Delete/{userId}")]
+        public async Task<IActionResult> Delete(Guid userId)
+        {
+            var result = await _userService.Delete(userId);
+            return Ok(result.Message);
+        }
+
+        [HttpGet("UserPaging")]
+        public async Task<IActionResult> UserPaging([FromQuery] PagingRequestBase request)
+        {
+            var comicStrips = await _userService.GetUserPaging(request);
+            return Ok(comicStrips);
+        }
+
     }
 }

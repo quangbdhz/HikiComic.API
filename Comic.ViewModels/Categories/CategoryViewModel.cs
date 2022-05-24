@@ -11,5 +11,7 @@
         public int? ParentId { get; set; }
 
         public string UrlImageCategory { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

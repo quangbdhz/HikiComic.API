@@ -1,5 +1,6 @@
 ﻿using Comic.Data.EF;
 using Comic.ViewModels.ChapterComics;
+using Comic.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Net;
@@ -13,6 +14,19 @@ namespace Comic.Application.ChapterComics
         public ChapterComicService(ComicDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<ApiResult<bool>> AddViewCount(string seoAliasChapter)
+        {
+            seoAliasChapter = WebUtility.UrlDecode(seoAliasChapter);
+            var chapter = await _context.ChapterComics.SingleOrDefaultAsync(x => x.SeoAlias == seoAliasChapter);
+            if (chapter == null)
+                return new ApiErrorResult<bool>("Chapter Is Not Available");
+
+            chapter.ViewCount += 1;
+            await _context.SaveChangesAsync();
+
+            return new ApiSuccessResult<bool>("Add ViewCount Chapter Success");
         }
 
         public async Task<List<ChapterComicViewModel>> GetByComicId(int idComic)

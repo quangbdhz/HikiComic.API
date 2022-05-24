@@ -36,5 +36,15 @@ namespace Comic.BackendAPI.Controllers
             return Ok(chapterComics);
         }
 
+        [HttpPatch("AddViewCount/{seoAliasChapter}")]
+        public async Task<IActionResult> AddViewCount(string seoAliasChapter)
+        {
+            var chapterComic = await _chapterComicService.AddViewCount(seoAliasChapter);
+
+            if (chapterComic == null)
+                return NotFound();
+
+            return Ok(chapterComic);
+        }
     }
 }
