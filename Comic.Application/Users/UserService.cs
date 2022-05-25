@@ -245,6 +245,7 @@ namespace Comic.Application.Users
             user.PhoneNumber = request.PhoneNumber;
             user.GenderId = request.GenderId;
             user.Dob = request.Dob;
+            user.UrlImageUser = request.UrlImageUser;
 
             await _context.SaveChangesAsync();
 

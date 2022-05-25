@@ -12,6 +12,8 @@
 
         public string PhoneNumber { get; set; }
 
+        public string? UrlImageUser { get; set; }
+
         public int GenderId { get; set; }
     }
 }
