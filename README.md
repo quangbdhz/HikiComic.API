@@ -20,7 +20,7 @@
 - Change connection string in Appsetting.json in HikiCoffee.Data project
 - Open Tools --> Nuget Package Manager --> Package Manager Console in Visual Studio
 - ```update-database```
-- Set Startup Projects : **HikiCoffee.BackendAPI**
+- Set Startup Projects : **Comic.BackendAPI**
 
 ## How to contribute
 
